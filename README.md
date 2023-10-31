@@ -8,7 +8,7 @@ Sprint-Flitzer
 Vasco Pogade und Nicolas Jobstvogt
 
 # Outline of the idea:
-Sprintmanager, um den Scrumprozess zu planen, strukturieren und gemeinsam agil an einem Softwareprojekt zu arbeiten.
+Sprintmanager, um den SCRUM-Prozess zu planen, strukturieren und gemeinsam agil an einem Softwareprojekt zu arbeiten.
 # Value proposition: 
 Das Ziel ist eine Anwendung zu erstellen, um bei zukünftigen Programmierprojekten eine Webanwendung zu haben, mit der ein SCRUM-Prozess strukturiert abgearbeitet werden kann. 
 
