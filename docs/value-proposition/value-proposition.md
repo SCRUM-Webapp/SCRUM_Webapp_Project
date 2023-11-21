@@ -6,7 +6,7 @@ nav_order: 1
 {: .label }
 [Jane Dane]
 
-# [Value proposition]
+#Value proposition
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,6 +19,7 @@ nav_order: 1
 ## [The problem]
 
 ## [Our solution]
+Das Ziel ist eine Anwendung zu erstellen, um bei zukünftigen Programmierprojekten eine Webanwendung zu haben, mit der ein SCRUM-Prozess strukturiert abgearbeitet werden kann.
 
 ## [Target user]
 

@@ -3,32 +3,19 @@ title: Home
 nav_order: 0
 ---
 
-{: .attention }
-> Any text enclosed by `[ ]` are placeholders, including the opening and closing brackets.
->
-> You may delete this `attention` box.
+#SCRUM_Webapp
 
-# [Project Name]
-
-[Project description]
+Sprintmanager, um den SCRUM-Prozess zu planen, strukturieren und gemeinsam agil an einem Softwareprojekt zu arbeiten.
 
 ## Team members
 
-### [Jane Dane]
+###Vasco Pogade
 
-About
-: Some info about Jane
+Ich möchte möglichst viel über die Entwicklung von Webanwendungen lernen und herausfinden, ob Webentwicklung etwas ist, wo ich auch später tätig sein will.
 
-Matr.-Nr.
-: 1234567
+###Nicolas Jobstvogt
 
-### [Joe Doe]
-
-About
-: Some info about Joe
-
-Matr.-Nr.
-: 1234567
+Ich möchte meine Python-Kenntnisse verbessern und ich bin interessiert, mich mit dem neuen Softwarestack auseinander zu setzen.
 
 ## Eidesstattliche Erklärung
 
