@@ -3,17 +3,17 @@ title: Home
 nav_order: 0
 ---
 
-#SCRUM_Webapp
+# SCRUM_Webapp
 
 Sprintmanager, um den SCRUM-Prozess zu planen, strukturieren und gemeinsam agil an einem Softwareprojekt zu arbeiten.
 
 ## Team members
 
-###Vasco Pogade
+### Vasco Pogade
 
 Ich möchte möglichst viel über die Entwicklung von Webanwendungen lernen und herausfinden, ob Webentwicklung etwas ist, wo ich auch später tätig sein will.
 
-###Nicolas Jobstvogt
+### Nicolas Jobstvogt
 
 Ich möchte meine Python-Kenntnisse verbessern und ich bin interessiert, mich mit dem neuen Softwarestack auseinander zu setzen.
 
