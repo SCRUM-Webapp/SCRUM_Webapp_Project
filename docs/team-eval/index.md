@@ -5,6 +5,6 @@ nav_order: 5
 ---
 
 {: .label }
-[Jane Dane]
+[Nicolas Jobstvogt, Vasco Pogade]
 
 # [Team evaluation]
