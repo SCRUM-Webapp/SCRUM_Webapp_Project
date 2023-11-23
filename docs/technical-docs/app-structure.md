@@ -18,13 +18,13 @@ nav_order: 1
 </details>
 
 ## Product Backlog
-![product backlog](/SCRUM_Webapp_Project/assets/images/product_backlog.png)
+![product backlog](/SCRUM_Webapp_Project/assets/images/product_backlog.jpg)
 
 ## Sprint Backlog
-![sprint backlog](/SCRUM_Webapp_Project/assets/images/sprint_backlog.png)
+![sprint backlog](/SCRUM_Webapp_Project/assets/images/sprint_backlog.jpg)
 
 ## Submit Ticket
-![submit ticket](/SCRUM_Webapp_Project/assets/images/submit_ticket.png)
+![submit ticket](/SCRUM_Webapp_Project/assets/images/submit_ticket.jpg)
 
 ## Delete Ticket
-![delete ticket](/SCRUM_Webapp_Project/assets/images/delete_ticket.png)
+![delete ticket](/SCRUM_Webapp_Project/assets/images/delete_ticket.jpg)
