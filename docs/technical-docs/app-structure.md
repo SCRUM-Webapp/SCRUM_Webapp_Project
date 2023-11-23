@@ -26,5 +26,5 @@ nav_order: 1
 ## Submit Ticket
 ![version 1.0](/SCRUM_Webapp_Project/assets/images/submit_ticket.png)
 
-## delete_ticket
+## Delete Ticket
 ![version 1.0](/SCRUM_Webapp_Project/assets/images/delete_ticket.png)
