@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 {: .label }
-[Jane Dane]
+[Nicolas Jobstvogt, Vasco Pogade]
 
 # [Design decisions]
 {: .no_toc }

@@ -5,7 +5,7 @@ nav_order: 2
 ---
 
 {: .label }
-[Jane Dane]
+[Nicolas Jobstvogt, Vasco Pogade]
 
 # [App behavior]
 {: .no_toc }

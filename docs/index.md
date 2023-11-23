@@ -9,11 +9,11 @@ Sprintmanager, um den SCRUM-Prozess zu planen, strukturieren und gemeinsam agil 
 
 ## Team members
 
-### Vasco Pogade
+### Vasco
 
 Ich möchte möglichst viel über die Entwicklung von Webanwendungen lernen und herausfinden, ob Webentwicklung etwas ist, wo ich auch später tätig sein will.
 
-### Nicolas Jobstvogt
+### Nicolas
 
 Ich möchte meine Python-Kenntnisse verbessern und ich bin interessiert, mich mit dem neuen Softwarestack auseinander zu setzen.
 
