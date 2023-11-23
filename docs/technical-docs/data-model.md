@@ -18,4 +18,4 @@ nav_order: 3
 </details>
 
 ## Version 1.0
-![version 1.0](/SCRUM_Webapp_Project/assets/images/data_structe_version1.png)
+![version 1.0](/SCRUM_Webapp_Project/assets/images/data_structure_version1.png)
