@@ -6,6 +6,6 @@ app = Flask(__name__)
 def index():
     return 'Hello World, this is a test!'
 
-@app.route('/product_backlog')
+@app.route('/Product_Backlog')
 def product_backlog():
-    return render_template('product_backlog.html')
+    return render_template('Product_Backlog.html')
