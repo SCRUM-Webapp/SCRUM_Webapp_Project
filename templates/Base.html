@@ -12,33 +12,42 @@
 
 <body>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Navigation
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="margin: 10px;">
+  Menu
 </button>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <a class="btn btn-secondary" href="{{ url_for('product_backlog') }}">Product Backlog</a>
-    <a class="btn btn-secondary" href="{{ url_for('sprint_planning') }}">Sprint Planning</a>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Account
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
-        <li><a class="dropdown-item" href="#">Edit account</a></li>
-        <div class="dropdown-divider"></div>
-        <li><a class="dropdown-item" href="#">Log Out</a></li>
-      </ul>
-    </div>
+    <ul class="nav flex-column mb-2">
+      <li style="margin-bottom: 5px;"><a class="btn btn-secondary" href="{{ url_for('product_backlog') }}">Product Backlog</a></li>
+      <li style="margin-top: 5px;"><a class="btn btn-secondary" href="{{ url_for('sprint_planning') }}">Sprint Planning</a></li>
+      <li>  
+        <div class="dropdown mt-3">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                <li><a class="dropdown-item" href="#">Edit account</a></li>
+                <div class="dropdown-divider"></div>
+                <li><a class="dropdown-item" href="#">Log Out</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
 
+<header>{% block HEADER %}{% endblock %}</header>
 
-{% block content %}{% endblock %}
+    <main>
+    <!-- Hier war noch render messages -->
+        {% block CONTENT %}{% endblock %}
+    </main>
 
+{% block SCRIPTS %}{% endblock %}
 {{ bootstrap.load_js() }}
 </body>
 </html>

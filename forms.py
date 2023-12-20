@@ -9,6 +9,6 @@ class LoginForm(FlaskForm):
 
 class TicketForm(FlaskForm):
     ticket_id = HiddenField('Ticket ID')
-    title = StringField('Title', validators=[InputRequired(), Length(min=3, max=20)])
-    description = StringField('Description', validators=[InputRequired(), Length(min=3, max=20)])
+    title = StringField('Title', validators=[InputRequired(), Length(min=3, max=30)])
+    description = StringField('Description', validators=[InputRequired(), Length(min=3, max=100)])
     submit = SubmitField('Save')
