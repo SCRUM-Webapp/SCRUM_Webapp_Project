@@ -7,6 +7,8 @@ app.config.from_mapping(
     BOOTSTRAP_BOOTSWATCH_THEME = 'quartz'
 )
 
+from db import db, Ticket, insert_sample
+
 bootstrap = Bootstrap5(app)
 
 @app.route('/')
