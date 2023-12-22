@@ -74,6 +74,22 @@
         </div>
 
         <div class="form-group">
+        <label for="exampleTextarea" class="form-label mt-4">Notes</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter notes here" aria-describedby="NotesHelp"></textarea>
+        <small id="NotesHelp" class="form-text text-muted">Any comments or notes regarding this ticket?</small>
+        </div>
+
+        <div class="form-group" id="OwnerSelect" style="display:block;">
+            <label for="OwnerSelect" class="form-label mt-4">Person working on ticket</label>
+            <select class="form-select" id="OwnerSelect" aria-describedby="ownerHelp">
+                <option>Person 1</option>
+                <option>Person 2</option>
+                <option>Person 3</option>
+            </select>
+            <small id="ownerHelp" class="form-text text-muted">Who is working on this ticket?</small>
+        </div>
+
+        <div class="form-group">
         <label for="formFile" class="form-label mt-4">Additional Files</label>
         <input class="form-control" type="file" id="formFile">
         </div>

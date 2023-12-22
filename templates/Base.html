@@ -10,11 +10,14 @@
     {{ bootstrap.load_css() }}
 </head>
 
+<!-- Check out block TITLE! -->
+
 <body>
 
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="margin: 10px;">
   Menu
 </button>
+{% block ADDNEWITEM %}{% endblock %}
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
