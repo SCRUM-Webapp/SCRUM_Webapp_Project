@@ -1,6 +1,3 @@
-{% from 'bootstrap5/nav.html' import render_nav_item %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +14,9 @@
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="margin: 10px;">
   Menu
 </button>
+
 {% block ADDNEWITEM %}{% endblock %}
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
@@ -33,7 +32,7 @@
             Account
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
-                <li><a class="dropdown-item" href="#">Edit account</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('profile') }}">Edit account</a></li>
                 <div class="dropdown-divider"></div>
                 <li><a class="dropdown-item" href="#">Log Out</a></li>
           </ul>

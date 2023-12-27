@@ -1,5 +1,8 @@
 {% extends 'Base.html' %}
 
+{%block TITLE%}Ticket-template{%endblock%}
+<!-- add Ticket ID here dynamically -->
+
 {% block CONTENT%}
 
 <div class="container" style="margin: 30px;">
@@ -96,7 +99,7 @@
 
         <div class="form-group row" style="margin-top: 25px; margin-left: 0px">
         <button type="button" class="btn btn-primary col-sm-1">Delete</button>
-        <button type="button" class="btn btn-secondary col-sm-1" style="margin-left: 25px; margin-right: 25px">Cancel</button>
+        <a href="{{ url_for('product_backlog') }}" class="btn btn-secondary col-sm-1" style="margin-left: 25px; margin-right: 25px">Cancel</a>
         <button type="submit" class="btn btn-success col-sm-1">Submit</button>
         </div>
 
