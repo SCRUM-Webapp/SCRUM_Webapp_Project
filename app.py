@@ -44,3 +44,7 @@ def sprint_planning():
 @app.route('/Profile')
 def profile():
     return render_template('Profile.html')
+
+@app.route('/Logout')
+def logout():
+    return redirect(url_for('login'))
