@@ -3,27 +3,28 @@
 {% block CONTENT %}
     <div class="d-flex align-items-center justify-content-center" style="height: 80vh; width: 100vw;">
     <!-- added d-flex align-items-center justify-content-center to center the form vertically and horizontally -->
-        <form>
+        <form method="post" action="{{url_for('register')}}">
+        {{ form.hidden_tag() }}
             <fieldset>
 
                 <legend>Register</legend>
 
                 <div class="form-group">
-                    <label for="InputRegisterUsername">Username</label>
-                    <input type="text" name="username" class="form-control" id="InputRegisterName" aria-describedby="NameRegisterHelp" placeholder="Enter Username">
+                    {{ form.username.label }}
+                    {{ form.username(class="form-control") }}
                 </div>
 
                 <div class="form-group">
-                    <label for="InputRegisterEmail">Email address</label>
-                    <input type="email" name="email" class="form-control" id="InputRegisterEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    {{ form.email.label }}
+                    {{ form.email(class="form-control") }}
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    {{ form.password.label }}
+                    {{ form.password(class="form-control") }}
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Register</button>
+                {{ form.submit(class="btn btn-primary", style="margin-top: 15px;") }}
                 
             </fieldset>
         </form>
