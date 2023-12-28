@@ -1,3 +1,5 @@
+{% from 'bootstrap5/utils.html' import render_messages %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +47,7 @@
 <header>{% block HEADER %}{% endblock %}</header>
 
     <main>
+    {{ render_messages(dismissible=True, dismiss_animate=True) }}
     <!-- Hier war noch render messages -->
         {% block CONTENT %}{% endblock %}
     </main>

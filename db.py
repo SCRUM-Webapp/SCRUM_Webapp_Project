@@ -2,6 +2,7 @@ import click
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import orm
 from app import app
+from flask_login import UserMixin
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ticket_database.db' 
 
@@ -17,12 +18,12 @@ class Ticket(db.Model):
     description = db.Column(db.Text)
     ticket_status = db.Column(db.String(14), default='Sprint Backlog') #done, in progress etc.
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'user'
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
 
 with app.app_context():
     db.create_all()

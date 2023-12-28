@@ -1,11 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, SubmitField, HiddenField, BooleanField, SelectField
-from wtforms.validators import InputRequired, Length
+from wtforms.fields import StringField, SubmitField, HiddenField, PasswordField, EmailField
+from wtforms.validators import InputRequired, Length, Email
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(min=3, max=20)])
-    password = StringField('Password', validators=[InputRequired(), Length(min=3, max=20)])
+    email = EmailField('Email', validators=[InputRequired(), Email(), Length(min=3, max=50)], render_kw={"placeholder": "Enter email"})
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Enter password"})
     submit = SubmitField('Login')
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[InputRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Enter username"})
+    email = EmailField('Email', validators=[InputRequired(),Email(), Length(min=3, max=50)], render_kw={"placeholder": "Enter email"})
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Enter password"})
+    submit = SubmitField('Register')
 
 class TicketForm(FlaskForm):
     ticket_id = HiddenField('Ticket ID')
