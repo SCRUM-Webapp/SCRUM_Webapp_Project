@@ -21,7 +21,7 @@ Vasco Pogade
 ### Meta
 
 Status
-: **Work in progress** - Decided - Obsolete
+: Work in progress - **Decided** - Obsolete
 
 Updated
 : 08-12-2023
