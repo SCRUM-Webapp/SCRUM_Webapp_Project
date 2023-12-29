@@ -16,8 +16,7 @@ class Ticket(db.Model):
     sprint_number = db.Column(db.Integer) 
     workload = db.Column(db.Float)
     description = db.Column(db.Text)
-    ticket_status = db.Column(db.String(14), default='Sprint Backlog') #done, in progress etc.
-
+    ticket_status = db.Column(db.String(17), default='Inbox') #Inbox, Analyze, Ready for Sprint, Next Sprint // To-Do, In Progress, Testing, Finished/Obsolete
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -45,12 +44,14 @@ def insert_sample():
 
     # Create sample ticket items
     ticket1 = Ticket(ticket_name='Build logic to attach database to UI',sprint_number=1, workload=10, description='Needs to be implemented', ticket_status='in Progress')
+    ticket2 = Ticket(ticket_name='Ticket2 ', workload=10, description='testing stuff')
 
     # Create sample user
     user1 = User(username='testUser', email='test@gmail.com',  password='test123')
 
     # Add all objects to the queue and commit them to the database
     db.session.add(ticket1)
+    db.session.add(ticket2)
     db.session.add(user1)
     db.session.commit()
     """ db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])

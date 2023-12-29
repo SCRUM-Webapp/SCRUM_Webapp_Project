@@ -84,21 +84,25 @@ from sqlalchemy import inspect
 @login_required
 def product_backlog():
     # Select all Tickets, order by ticket_id
-    tickets = db.session.query(Ticket).order_by(Ticket.ticket_id).all()
-    #tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id)).fetchall()
-    tickets2 = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
-    print(tickets)
-    #print(select(Ticket))
-    print(type(tickets))
+    inbox_tickets = db.session.query(Ticket).filter_by(ticket_status='Inbox', sprint_number=None).order_by(Ticket.ticket_id).all()
+    analyze_tickets = db.session.query(Ticket).filter_by(ticket_status='Analyze', sprint_number=None).order_by(Ticket.ticket_id).all()
+    ready_for_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Ready for Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
+    next_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Next Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
 
-    print(tickets2)
-    print(type(tickets2))
+    #tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id)).fetchall()
+    #tickets2 = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
+    #print(tickets)
+    #print(select(Ticket))
+    #print(type(tickets))
+
+    #print(tickets2)
+    #print(type(tickets2))
 
     # Convert the SQLAlchemy Row objects to a list of dictionaries
     #tickets_list = [dict(ticket) for ticket in tickets]
 
     # Pass the list of dictionaries to the template
-    return render_template('Product_Backlog.html', tickets=tickets)
+    return render_template('Product_Backlog.html', inbox_tickets=inbox_tickets, analyze_tickets=analyze_tickets, ready_for_sprint_tickets=ready_for_sprint_tickets, next_sprint_tickets=next_sprint_tickets)
 """ @app.route('/Product_Backlog')
 @login_required
 def product_backlog():
