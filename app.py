@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, RegisterForm, TicketForm
+from sqlalchemy.exc import SQLAlchemyError
 
 
 app = Flask(__name__)
@@ -77,11 +78,35 @@ def register():
 def new_ticket():
     return render_template('Ticket.html')
 
+from sqlalchemy import inspect
+
 @app.route('/Product_Backlog')
 @login_required
 def product_backlog():
-    return render_template('Product_Backlog.html')
+    # Select all Tickets, order by ticket_id
+    tickets = db.session.query(Ticket).order_by(Ticket.ticket_id).all()
+    #tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id)).fetchall()
+    tickets2 = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
+    print(tickets)
+    #print(select(Ticket))
+    print(type(tickets))
 
+    print(tickets2)
+    print(type(tickets2))
+
+    # Convert the SQLAlchemy Row objects to a list of dictionaries
+    #tickets_list = [dict(ticket) for ticket in tickets]
+
+    # Pass the list of dictionaries to the template
+    return render_template('Product_Backlog.html', tickets=tickets)
+""" @app.route('/Product_Backlog')
+@login_required
+def product_backlog():
+    #select all Tickets order by ticket_id convert to list because otherwise ChunkedIteratorResult Error when debugging
+    tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
+    #pass the tickets to the template
+    return render_template('Product_Backlog.html', tickets=tickets) """
+    
 @app.route('/Ticket/<int:ticket_id>')
 @login_required
 def ticket(ticket_id):
