@@ -1,6 +1,7 @@
+from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap5
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, RegisterForm, TicketForm
 
@@ -27,7 +28,16 @@ def load_user(user_id):
 @app.route('/')
 @login_required
 def index():
-    return render_template('base.html')
+    current_time = datetime.now()
+    hour = current_time.hour
+
+    if 4 <= hour < 12:
+        time_of_day = 'morning'
+    elif 12 <= hour < 18:
+        time_of_day = 'afternoon'
+    else:
+        time_of_day = 'evening'
+    return render_template('Index.html', username=current_user.username, time_of_day=time_of_day)
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
@@ -42,7 +52,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('product_backlog'))
+            return redirect(url_for('index'))
         else:
             flash('Invalid username or password')
 
