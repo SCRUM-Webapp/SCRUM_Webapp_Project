@@ -28,7 +28,7 @@
     <ul class="nav flex-column mb-2">
       <li style="margin-bottom: 5px;"><a class="btn btn-secondary" href="{{ url_for('index') }}">Home</a></li>
       <li style="margin-bottom: 5px; margin-top: 5px"><a class="btn btn-secondary" href="{{ url_for('product_backlog') }}">Product Backlog</a></li>
-      <li style="margin-top: 5px;"><a class="btn btn-secondary" href="{{ url_for('sprint_planning') }}">Sprint Planning</a></li>
+      <li style="margin-top: 5px;"><a class="btn btn-secondary" href="{{ url_for('sprint_planning', selected_sprint=1) }}">Sprint Planning</a></li>
       <li>  
         <div class="dropdown mt-3">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

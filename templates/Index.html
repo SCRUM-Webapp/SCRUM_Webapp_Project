@@ -10,7 +10,8 @@
                 <a href="{{url_for('product_backlog')}}" class="btn btn-primary" style="width: 150px;">Product Backlog</a>
             </div>
             <div class="col-6">
-                <a href="{{url_for('sprint_planning')}}" class="btn btn-primary" style="width: 150px;">Sprint <br> Planning</a>
+                <a href="{{ url_for('sprint_planning', selected_sprint=1) }}" class="btn btn-primary" style="width: 150px;">Sprint <br> Planning</a>
+
             </div>
         </div>
     </div>

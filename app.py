@@ -126,10 +126,25 @@ def product_backlog():
 def ticket(ticket_id):
     return render_template('Ticket.html')
 
-@app.route('/Sprint_Planning')
+@app.route('/Sprint_Planning/<selected_sprint>')
 @login_required
-def sprint_planning():
-    return render_template('Sprint_Planning.html')
+def sprint_planning(selected_sprint):
+    if selected_sprint == 'add':
+        # Handle the case when the user clicks on "+ Add Sprint"
+        # This could be a separate route or logic depending on your requirements
+        pass
+    else:
+        # Handle the case when a specific sprint is selected
+        # You can use the selected_sprint parameter to filter tickets
+        # and render the template accordingly
+        sprint_number = int(selected_sprint)
+        # Query tickets for the selected sprint
+        to_do = db.session.query(Ticket).filter_by(ticket_status='To-Do', sprint_number=sprint_number).all()
+        in_progress = db.session.query(Ticket).filter_by(ticket_status='In Progress', sprint_number=sprint_number).all()
+        testing = db.session.query(Ticket).filter_by(ticket_status='Testing', sprint_number=sprint_number).all()
+        finished_obsolete = db.session.query(Ticket).filter_by(ticket_status='Finished/Obsolete', sprint_number=sprint_number).all()
+        
+        return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
 
 @app.route('/Profile')
 @login_required
