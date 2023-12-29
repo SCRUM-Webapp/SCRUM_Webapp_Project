@@ -43,7 +43,7 @@ def insert_sample():
     db.session.execute(db.delete(User))
 
     # Create sample ticket items
-    ticket1 = Ticket(ticket_name='Build logic to attach database to UI',sprint_number=1, workload=10, description='Needs to be implemented', ticket_status='in Progress')
+    ticket1 = Ticket(ticket_name='Build logic to attach database to UI',sprint_number=1, workload=10, description='Needs to be implemented', ticket_status='In Progress')
     ticket2 = Ticket(ticket_name='Ticket2 ', workload=10, description='testing stuff')
 
     # Create sample user
