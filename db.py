@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import orm
 from app import app
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ticket_database.db' 
 
@@ -47,7 +48,8 @@ def insert_sample():
     ticket2 = Ticket(ticket_name='Ticket2 ', workload=10, description='testing stuff')
 
     # Create sample user
-    user1 = User(username='testUser', email='test@gmail.com',  password='test123')
+    sample_password = generate_password_hash('test123')
+    user1 = User(username='testUser', email='test@gmail.com',  password=sample_password)
 
     # Add all objects to the queue and commit them to the database
     db.session.add(ticket1)
