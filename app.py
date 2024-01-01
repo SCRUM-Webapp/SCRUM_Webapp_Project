@@ -69,10 +69,14 @@ def register():
         email = form.email.data
         password = form.password.data
 
-        # Check if user already exists
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('This Email address already exists.')
+        # Check if username or email already exists
+        existing_username = User.query.filter_by(username=username).first()
+        existing_email = User.query.filter_by(email=email).first()
+
+        if existing_username:
+            flash('This username is already taken.')
+        elif existing_email:
+            flash('An account with that email already exists')
         else:
             # Create new user
             hashed_password = generate_password_hash(password)
