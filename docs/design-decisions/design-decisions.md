@@ -37,9 +37,9 @@ We decided to opt for the seperate page since it requires less knowledge of Java
 ### Regarded options
 
 **Option 1: Using Bootstrap modals with JavaScript**
-- Requires knowledge of JavaScript as well of the AJAX technique
+- Requires knowledge of JavaScript and AJAX technique
 - would be more complex
-- would be more intuitive for the user since he remains on the same site and even sees the rest of the list of items in the background
+- would be more intuitive for the user since he remains on the same site
 
 **Option 2: Using Bootstrap modals with  HTML/CSS**
 - less JavaScript/AJAX knowledge needed
