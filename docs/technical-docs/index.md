@@ -5,6 +5,6 @@ nav_order: 2
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
 # [Technical documentation]
