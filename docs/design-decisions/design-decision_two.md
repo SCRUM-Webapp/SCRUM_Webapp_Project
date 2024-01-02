@@ -42,12 +42,12 @@ We regarded two alternative options:
 + Plain SQL statements
 + SQLAlchemy
 
- Pro SQLAlchemy: | Con SQLAlchemy
- :-- | :-- 
- ✔️ Object oriented programming | ❌ Takes time to learn
- ✔️ Gives us flexibility | ❌ We know how to write SQL statements
- ✔️ No need to write SQL statements | ❌ Could affec database performance (unlikely)
- ✔️ Gives us code clarity 
- ✔️ No need to establish db_con 
- ✔️ Learning a new technology 
- ✔️ Might make up for the time lost initally 
+ | Pro SQLAlchemy: | Con SQLAlchemy |
+ | :-- | :-- | 
+ | ✔️ Object oriented programming | ❌ Takes time to learn |
+ | ✔️ Gives us flexibility | ❌ We know how to write SQL statements |
+ | ✔️ No need to write SQL statements | ❌ Could affec database performance (unlikely) |
+ | ✔️ Gives us code clarity | |
+ | ✔️ No need to establish db_con | |
+ | ✔️ Learning a new technology | |
+ | ✔️ Might make up for the time lost initally | |
