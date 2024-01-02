@@ -46,7 +46,7 @@ We regarded two alternative options:
  | :-- | :-- | 
  | ✔️ Object oriented programming | ❌ Takes time to learn |
  | ✔️ Gives us flexibility | ❌ We know how to write SQL statements |
- | ✔️ No need to write SQL statements | ❌ Could affec database performance (unlikely) |
+ | ✔️ No need to write SQL statements | ❌ Could affect database performance (unlikely) |
  | ✔️ Gives us code clarity | |
  | ✔️ No need to establish db_con | |
  | ✔️ Learning a new technology | |
