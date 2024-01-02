@@ -1,12 +1,12 @@
 ---
 title: Design Decisions
-nav_order: 3
+nav_order: 1
 ---
 
 {: .label }
-Vasco Pogade
+Vasco
 
-# Design decisions
+# Design Decisions
 {: .no_toc }
 
 <details open markdown="block">
