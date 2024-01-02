@@ -1,5 +1,6 @@
 ---
-title: Design Decisions
+title: Design Decision 1
+parent: Design Decisions
 nav_order: 1
 ---
 

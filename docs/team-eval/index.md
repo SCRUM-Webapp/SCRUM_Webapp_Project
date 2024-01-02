@@ -5,6 +5,6 @@ nav_order: 5
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
 # [Team evaluation]
