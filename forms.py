@@ -14,9 +14,9 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Register')
 
 class TicketForm(FlaskForm):
-    ticket_id = HiddenField('Ticket ID')
+    #ticket_id = HiddenField('Ticket ID')
     ticket_name = StringField('Ticket_Name', validators=[InputRequired(), Length(min=3, max=30)])
-    description = StringField('Description', validators=[InputRequired(), Length(min=3, max=100)])
+    description = StringField('Description', validators=[InputRequired(), Length(min=3, max=100)], render_kw={"placeholder": "What is this ticket about?"})
     sprint_number = IntegerField('Sprint Number')
     workload = FloatField('Workload')
     ticket_status = StringField('Ticket Status')
