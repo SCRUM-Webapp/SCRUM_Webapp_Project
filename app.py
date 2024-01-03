@@ -102,6 +102,10 @@ def product_backlog():
     analyze_tickets = db.session.query(Ticket).filter_by(ticket_status='Analyze', sprint_number=None).order_by(Ticket.ticket_id).all()
     ready_for_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Ready for Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
     next_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Next Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
+    print("Inbox Tickets:", inbox_tickets)
+    print("Analyze Tickets:", analyze_tickets)
+    print("Ready for Sprint Tickets:", ready_for_sprint_tickets)
+    print("Next Sprint Tickets:", next_sprint_tickets)
 
     #tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id)).fetchall()
     #tickets2 = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
@@ -125,10 +129,34 @@ def product_backlog():
     #pass the tickets to the template
     return render_template('Product_Backlog.html', tickets=tickets) """
     
-@app.route('/Ticket/<int:ticket_id>')
+@app.route('/Ticket/<int:ticket_id>', methods=['GET', 'POST'])
 @login_required
 def ticket(ticket_id):
-    return render_template('Ticket.html')
+    ticket = db.session.query(Ticket).filter_by(ticket_id=ticket_id).first()
+    if not ticket:
+        abort(404)
+
+    form = TicketForm(obj=ticket)
+
+    if form.validate_on_submit():
+        form.populate_obj(ticket)
+
+        # Check the selected values and update accordingly
+        if form.product_sprint_select.data == 'productBacklog':
+            # Update ticket status based on backlog status
+            ticket.ticket_status = form.backlog_select.data
+
+        elif form.product_sprint_select.data == 'sprintPlanning':
+            # Update ticket status based on sprint status
+            ticket.ticket_status = form.sprint_select.data
+            # Update sprint number
+            ticket.sprint_number = form.sprint_number.data
+
+        db.session.commit()
+        print(f"Ticket {ticket.ticket_name} updated successfully.")
+        return redirect(url_for('product_backlog'))
+
+    return render_template('Ticket.html', ticket=ticket, form=form)
 
 @app.route('/Sprint_Planning/<selected_sprint>')
 @login_required
@@ -147,7 +175,7 @@ def sprint_planning(selected_sprint):
         in_progress = db.session.query(Ticket).filter_by(ticket_status='In Progress', sprint_number=sprint_number).all()
         testing = db.session.query(Ticket).filter_by(ticket_status='Testing', sprint_number=sprint_number).all()
         finished_obsolete = db.session.query(Ticket).filter_by(ticket_status='Finished/Obsolete', sprint_number=sprint_number).all()
-        
+
         return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
 
 @app.route('/Profile')
