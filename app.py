@@ -87,10 +87,32 @@ def register():
             return redirect(url_for('login'))
     return render_template('Register.html', form=form)
 
-@app.route('/Ticket/New_Ticket')
+@app.route('/Ticket/New_Ticket', methods=['GET', 'POST'])
 @login_required
 def new_ticket():
-    return render_template('Ticket.html')
+    form = TicketForm(request.form)
+    
+    if form.validate_on_submit():
+        new_ticket = Ticket()
+        form.populate_obj(new_ticket)
+
+        if form.product_sprint_select.data == 'productBacklog':
+
+            new_ticket.ticket_status = form.backlog_select.data
+            new_ticket.sprint_number = None
+
+        elif form.product_sprint_select.data == 'sprintPlanning':
+            
+            new_ticket.ticket_status = form.sprint_select.data
+            new_ticket.sprint_number = form.sprint_number.data
+
+        db.session.add(new_ticket)
+        db.session.commit()
+        return redirect(url_for('product_backlog'))
+
+    return render_template('New_Ticket.html', form=form)
+
+
 
 from sqlalchemy import inspect
 
@@ -141,19 +163,18 @@ def ticket(ticket_id):
     if form.validate_on_submit():
         form.populate_obj(ticket)
 
-        # Check the selected values and update accordingly
+
         if form.product_sprint_select.data == 'productBacklog':
-            # Update ticket status based on backlog status
+
             ticket.ticket_status = form.backlog_select.data
+            ticket.sprint_number = None
 
         elif form.product_sprint_select.data == 'sprintPlanning':
-            # Update ticket status based on sprint status
+          
             ticket.ticket_status = form.sprint_select.data
-            # Update sprint number
             ticket.sprint_number = form.sprint_number.data
 
         db.session.commit()
-        print(f"Ticket {ticket.ticket_name} updated successfully.")
         return redirect(url_for('product_backlog'))
 
     return render_template('Ticket.html', ticket=ticket, form=form)
