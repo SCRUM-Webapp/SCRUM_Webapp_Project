@@ -1,139 +1,151 @@
 {% extends 'Base.html' %}
 
-{%block TITLE%}Ticket-template{%endblock%}
+{% block TITLE %}Ticket-template{% endblock %}
 <!-- add Ticket ID here dynamically -->
 
-{% block CONTENT%}
+{% block CONTENT %}
 
 <div class="container" style="margin: 30px;">
-    <form>
-    <fieldset>
-        <legend>Ticket-Editor</legend>
-        <div class="form-group row">
-        <label for="staticTicketID" class="col-sm-2 col-form-label">Ticket-ID</label>
-        <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticTicketID" value="5 (Example)">
-        </div>
+    <form method="POST" action="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend>Ticket-Editor</legend>
+            {# Ticket_ID #}
+            <div class="form-group row">
+                <label for="staticTicketID" class="col-sm-2 col-form-label">Ticket-ID</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly="" class="form-control-plaintext" id="staticTicketID"
+                        value="{{ ticket.ticket_id }}">
+                </div>
+            </div>
+            {# TITLE #}
+            <div class="form-group">
+                <label for="InputTitle" class="form-label mt-4">Title</label>
+                {{ form.ticket_name(class="form-control", id="InputTitle", placeholder="Enter the ticket's title here")
+                }}
+                <small id="titleHelp" class="form-text text-muted">This title will be displayed in the
+                    Product-Backlog/Sprint-Planning page</small>
+            </div>
 
-        </div>
-        <div class="form-group">
-        <label for="InputTitle" class="form-label mt-4">Title</label>
-        <input type="text" class="form-control" id="InputTitle" aria-describedby="titleHelp" placeholder="Enter the ticket's title here">
-        <small id="titleHelp" class="form-text text-muted">This title will be displayed in the Product-Backlog/Sprint-Planning page</small>
-        </div>
+            {# Product backlog/spring-planning #}
+            <div class="form-group">
+                <label for="ProductSprintSelect" class="form-label mt-4">Product-Backlog/Sprint-Planning</label>
+                <select class="form-select" id="ProductSprintSelect" onchange="displaySecondSelect()"
+                    aria-describedby="ProductSprintHelp" name="product_sprint_select">
+                    <option value="productBacklog">Product-Backlog</option>
+                    <option value="sprintPlanning">Sprint-Planning</option>
+                </select>
+                <small id="ProductSprintHelp" class="form-text text-muted">Is this ticket in the Product-Backlog or in
+                    the Sprint-Planning?</small>
+            </div>
 
-        <div class="form-group">
-        <label for="ProductSprintSelect" class="form-label mt-4">Product-Backlog/Sprint-Planning</label>
-        <select class="form-select" id="ProductSprintSelect" onchange="displaySecondSelect()" aria-describedby="ProductSprintHelp">
-            <option value="productBacklog">Product-Backlog</option>
-            <option value="sprintPlanning">Sprint-Planning</option>
-        </select>
-        <small id="ProductSprintHelp" class="form-text text-muted">Is this ticket in the Product-Backlog or in the Sprint-Planning?</small>
-        </div>
+            {# Backlog options #}
+            <div class="form-group" id="productBacklogSelect" style="display:none;">
+                <label for="backlogSelect" class="form-label mt-4">Backlog Status</label>
+                <select class="form-select" id="backlogSelect" aria-describedby="BacklogHelp" name="backlog_select">
+                    <option>Inbox</option>
+                    <option>Analyze</option>
+                    <option>Ready for Sprint</option>
+                    <option>Next Sprint</option>
+                </select>
+                <small id="BacklogHelp" class="form-text text-muted">Which phase is this ticket in?</small>
+            </div>
+            {# Sprint number #}
+            <div class="form-group" id="sprintNumberSelect" style="display:none;">
+                <label for="sprintNumberSelectField" class="form-label mt-4">Sprint Number</label>
+                <select class="form-select" id="sprintNumberSelectField" name="sprint_number"
+                    aria-describedby="SprintHelp">
+                    <option value="1">Sprint 1</option>
+                    <option value="2">Sprint 2</option>
+                    <option value="3">Sprint 3</option>
+                </select>
+                <small id="SprintHelp" class="form-text text-muted">Which Sprint is this ticket in?</small>
+            </div>
 
-        <!-- Conditional Select Field if Product-Backlog was chosen -->
-        <div class="form-group" id="productBacklogSelect" style="display:none;">
-            <label for="backlogSelect" class="form-label mt-4">Backlog Options</label>
-            <select class="form-select" id="backlogSelect" aria-describedby="BacklogHelp">
-                <option>Backlog-Option 1</option>
-                <option>Backlog-Option 2</option>
-                <option>Backlog-Option 3</option>
-            </select>
-            <small id="BacklogHelp" class="form-text text-muted">Which phase is this ticket in?</small>
-        </div>
+            {# Sprint options #}
+            <div class="form-group" id="sprintPlanningSelect" style="display:none;">
+                <label for="sprintSelectField" class="form-label mt-4">Sprint Status</label>
+                <select class="form-select" id="sprintSelectField" aria-describedby="SprintHelp" name="sprint_select">
+                    <option>To-Do</option>
+                    <option>In Progress</option>
+                    <option>Testing</option>
+                    <option>Finished/Obsolete</option>
+                </select>
+                <small id="SprintHelp" class="form-text text-muted">Which phase is this ticket in?</small>
+            </div>
 
-        <!-- Conditional Select Field for the Sprint the ticket is in if Sprint-Planning was chosen -->
-        <div class="form-group" id="sprintNumberSelect" style="display:none;">
-            <label for="sprintNumberSelect" class="form-label mt-4">Sprint Options</label>
-            <select class="form-select" id="sprintNumberSelect" aria-describedby="SprintHelp">
-                <option>Sprint 1</option>
-                <option>Sprint 2</option>
-                <option>Sprint 3</option>
-            </select>
-            <small id="SprintHelp" class="form-text text-muted">Which Sprint is this ticket in?</small>
-        </div>
+            {# Description #}
+            <div class="form-group">
+                <label for="exampleTextarea" class="form-label mt-4">Description</label>
+                <textarea class="form-control" id="exampleTextarea" name="description" rows="3"
+                    placeholder="Enter description here"
+                    aria-describedby="DescriptionHelp">{{ ticket.description }}</textarea>
 
-        <!-- Conditional Select Field for the Phase the ticket is in if Sprint-Planning was chosen -->
-        <div class="form-group" id="sprintPlanningSelect" style="display:none;">
-            <label for="sprintSelect" class="form-label mt-4">Sprint Options</label>
-            <select class="form-select" id="sprintSelect" aria-describedby="SprintHelp">
-                <option>Sprint-Column 1</option>
-                <option>Sprint-Column 2</option>
-                <option>Sprint-Column 3</option>
-            </select>
-            <small id="SprintHelp" class="form-text text-muted">Which phase is this ticket in?</small>
-        </div>
+                <small id="DescriptionHelp" class="form-text text-muted">What is this ticket about?</small>
+            </div>
+            {# Story POints #}
+            <div class="form-group">
+                <label for="InputStoryPoints" class="form-label mt-4">Story-Points</label>
+                <input type="number" class="form-control" id="InputStoryPoints" aria-describedby="StoryPointsHelp"
+                    placeholder="Enter required Story-Points here">
+                <small id="StoryPointsHelp" class="form-text text-muted">How many Story-Points does this ticket
+                    require?</small>
+            </div>
+            {# Notes #}
+            <div class="form-group">
+                <label for="exampleTextarea" class="form-label mt-4">Notes</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter notes here"
+                    aria-describedby="NotesHelp"></textarea>
+                <small id="NotesHelp" class="form-text text-muted">Any comments or notes regarding this ticket?</small>
+            </div>
+            {# Person working on ticket #}
+            <div class="form-group" id="OwnerSelect" style="display:block;">
+                <label for="OwnerSelect" class="form-label mt-4">Person working on ticket</label>
+                <select class="form-select" id="OwnerSelect" aria-describedby="ownerHelp">
+                    <option>Person 1</option>
+                    <option>Person 2</option>
+                    <option>Person 3</option>
+                </select>
+                <small id="ownerHelp" class="form-text text-muted">Who is working on this ticket?</small>
+            </div>
 
-        <div class="form-group">
-        <label for="exampleTextarea" class="form-label mt-4">Description</label>
-        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter description here" aria-describedby="DescriptionHelp"></textarea>
-        <small id="DescriptionHelp" class="form-text text-muted">What is this ticket about?</small>
-        </div>
-
-        <div class="form-group">
-        <label for="InputStoryPoints" class="form-label mt-4">Story-Points</label>
-        <input type="number" class="form-control" id="InputStoryPoints" aria-describedby="StoryPointsHelp" placeholder="Enter required Story-Points here">
-        <small id="StoryPointsHelp" class="form-text text-muted">How many Story-Points does this ticket require?</small>
-        </div>
-
-        <div class="form-group">
-        <label for="exampleTextarea" class="form-label mt-4">Notes</label>
-        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter notes here" aria-describedby="NotesHelp"></textarea>
-        <small id="NotesHelp" class="form-text text-muted">Any comments or notes regarding this ticket?</small>
-        </div>
-
-        <div class="form-group" id="OwnerSelect" style="display:block;">
-            <label for="OwnerSelect" class="form-label mt-4">Person working on ticket</label>
-            <select class="form-select" id="OwnerSelect" aria-describedby="ownerHelp">
-                <option>Person 1</option>
-                <option>Person 2</option>
-                <option>Person 3</option>
-            </select>
-            <small id="ownerHelp" class="form-text text-muted">Who is working on this ticket?</small>
-        </div>
-
-        <div class="form-group row" style="margin-top: 25px; margin-left: 0px">
-        <button type="button" class="btn btn-primary col-sm-1">Delete</button>
-        <a href="{{ url_for('product_backlog') }}" class="btn btn-secondary col-sm-1" style="margin-left: 25px; margin-right: 25px">Cancel</a>
-        <button type="submit" class="btn btn-success col-sm-1">Submit</button>
-        </div>
-
-
-    </fieldset>
+            <div class="form-group row" style="margin-top: 25px; margin-left: 0px">
+                <button type="button" class="btn btn-primary col-sm-1">Delete</button>
+                <a href="{{ url_for('product_backlog') }}" class="btn btn-secondary col-sm-1"
+                    style="margin-left: 25px; margin-right: 25px">Cancel</a>
+                <button type="submit" class="btn btn-success col-sm-1">Submit</button>
+            </div>
+        </fieldset>
     </form>
 </div>
 
 {% endblock %}
-
 {% block SCRIPTS %}
-
 <script>
+    window.onload = function () {
+        displaySecondSelect();
+        document.getElementById('ProductSprintSelect').addEventListener('change', displaySecondSelect);
+    };
 
-window.onload = function() {
-    displaySecondSelect();
-};
+    function displaySecondSelect() {
+        var selectValue = document.getElementById('ProductSprintSelect').value;
+        var backlogSelect = document.getElementById('productBacklogSelect');
+        var sprintColumnSelect = document.getElementById('sprintPlanningSelect');
+        var sprintNumberSelect = document.getElementById('sprintNumberSelect');
 
-function displaySecondSelect() {
-    var selectValue = document.getElementById('ProductSprintSelect').value;
-    var backlogSelect = document.getElementById('productBacklogSelect');
-    var sprintColumnSelect = document.getElementById('sprintPlanningSelect');
-    var sprintNumberSelect = document.getElementById('sprintNumberSelect');
-
-    if (selectValue === 'productBacklog') {
-        backlogSelect.style.display = 'block';
-        sprintColumnSelect.style.display = 'none';
-        sprintNumberSelect.style.display = 'none';
-    } else if (selectValue === 'sprintPlanning') {
-        sprintColumnSelect.style.display = 'block';
-        backlogSelect.style.display = 'none';
-        sprintNumberSelect.style.display = 'block';
-    } else {
-        backlogSelect.style.display = 'none';
-        sprintColumnSelect.style.display = 'none';
-        sprintNumberSelect.style.display = 'none';
+        if (selectValue === 'productBacklog') {
+            backlogSelect.style.display = 'block';
+            sprintColumnSelect.style.display = 'none';
+            sprintNumberSelect.style.display = 'none';
+        } else if (selectValue === 'sprintPlanning') {
+            sprintColumnSelect.style.display = 'block';
+            backlogSelect.style.display = 'none';
+            sprintNumberSelect.style.display = 'block';
+        } else {
+            backlogSelect.style.display = 'none';
+            sprintColumnSelect.style.display = 'none';
+            sprintNumberSelect.style.display = 'none';
+        }
     }
-}
 </script>
-
 {% endblock %}
-

@@ -4,17 +4,22 @@
 <div class="d-flex justify-content-center">
     <div style="margin-bottom: 35px;">
         <ul class="nav nav-tabs" role="tablist">
+            <!-- Add your sprint tabs here -->
             <li class="nav-item" role="presentation">
-                <a class="nav-link {% if selected_sprint == 1 %}active{% endif %}" href="{{ url_for('sprint_planning', selected_sprint=1) }}" role="tab">Sprint 1</a>
+                <a class="nav-link {% if selected_sprint == 1 %}active{% endif %}"
+                    href="{{ url_for('sprint_planning', selected_sprint=1) }}" role="tab">Sprint 1</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link {% if selected_sprint == 2 %}active{% endif %}" href="{{ url_for('sprint_planning', selected_sprint=2) }}" role="tab">Sprint 2</a>
+                <a class="nav-link {% if selected_sprint == 2 %}active{% endif %}"
+                    href="{{ url_for('sprint_planning', selected_sprint=2) }}" role="tab">Sprint 2</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link {% if selected_sprint == 3 %}active{% endif %}" href="{{ url_for('sprint_planning', selected_sprint=3) }}" role="tab">Sprint 3</a>
+                <a class="nav-link {% if selected_sprint == 3 %}active{% endif %}"
+                    href="{{ url_for('sprint_planning', selected_sprint=3) }}" role="tab">Sprint 3</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="{{ url_for('sprint_planning', selected_sprint='add') }}" role="tab">+ Add Sprint</a>
+                <a class="nav-link" href="{{ url_for('sprint_planning', selected_sprint='add') }}" role="tab">+ Add
+                    Sprint</a>
             </li>
         </ul>
     </div>
@@ -27,80 +32,136 @@
         <h3>To-Do</h3>
         <div class="accordion" id="toDoAccordion">
             {% for ticket in to_do %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="toDoHeading{{ ticket.id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#toDoCollapse{{ ticket.id }}" aria-expanded="false" aria-controls="toDoCollapse{{ ticket.id }}">
-                            {{ ticket.ticket_name }}
-                        </button>
-                    </h2>
-                    <div id="toDoCollapse{{ ticket.id }}" class="accordion-collapse collapse" aria-labelledby="toDoHeading{{ ticket.id }}" data-bs-parent="#toDoAccordion">
-                        <div class="accordion-body">
-                            {{ ticket.ticket_description }}
-                        </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="toDoHeading{{ ticket.ticket_id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#toDoCollapse{{ ticket.ticket_id }}" aria-expanded="false"
+                        aria-controls="toDoCollapse{{ ticket.ticket_id }}">
+                        ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
+                    </button>
+                </h2>
+                <div id="toDoCollapse{{ ticket.ticket_id }}" class="accordion-collapse collapse"
+                    aria-labelledby="toDoHeading{{ ticket.ticket_id }}" data-bs-parent="#toDoAccordion">
+                    <div class="accordion-body">
+                        <strong>Description:</strong> {{ ticket.description }}
+                        <br>
+                        <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
+                        <br>
+                        <strong>Workload:</strong> {{ ticket.workload }}
+                        <br>
+                        <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
+                            style="margin-top: 10px;">Edit ticket</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="col">
+    <div class="col" style="margin-left: 10px;">
+        <!-- Add similar sections for In Progress, Testing, and Finished/Obsolete -->
         <h3>In Progress</h3>
         <div class="accordion" id="inProgressAccordion">
             {% for ticket in in_progress %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="inProgressHeading{{ ticket.id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#inProgressCollapse{{ ticket.id }}" aria-expanded="false" aria-controls="inProgressCollapse{{ ticket.id }}">
-                            {{ ticket.ticket_name }}
-                        </button>
-                    </h2>
-                    <div id="inProgressCollapse{{ ticket.id }}" class="accordion-collapse collapse" aria-labelledby="inProgressHeading{{ ticket.id }}" data-bs-parent="#inProgressAccordion">
-                        <div class="accordion-body">
-                            {{ ticket.ticket_description }}
-                        </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="inProgressHeading{{ ticket.ticket_id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#inProgressCollapse{{ ticket.ticket_id }}" aria-expanded="false"
+                        aria-controls="inProgressCollapse{{ ticket.ticket_id }}">
+                        ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
+                    </button>
+                </h2>
+                <div id="inProgressCollapse{{ ticket.ticket_id }}" class="accordion-collapse collapse"
+                    aria-labelledby="inProgressHeading{{ ticket.ticket_id }}" data-bs-parent="#inProgressAccordion">
+                    <div class="accordion-body">
+                        <strong>Description:</strong> {{ ticket.description }}
+                        <br>
+                        <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
+                        <br>
+                        <strong>Workload:</strong> {{ ticket.workload }}
+                        <br>
+                        <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
+                            style="margin-top: 10px;">Edit ticket</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="col">
+    <div class="col" style="margin-left: 10px;">
         <h3>Testing</h3>
         <div class="accordion" id="testingAccordion">
             {% for ticket in testing %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="testingHeading{{ ticket.id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#testingCollapse{{ ticket.id }}" aria-expanded="false" aria-controls="testingCollapse{{ ticket.id }}">
-                            {{ ticket.ticket_name }}
-                        </button>
-                    </h2>
-                    <div id="testingCollapse{{ ticket.id }}" class="accordion-collapse collapse" aria-labelledby="testingHeading{{ ticket.id }}" data-bs-parent="#testingAccordion">
-                        <div class="accordion-body">
-                            {{ ticket.ticket_description }}
-                        </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="testingHeading{{ ticket.ticket_id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#testingCollapse{{ ticket.ticket_id }}" aria-expanded="false"
+                        aria-controls="testingCollapse{{ ticket.ticket_id }}">
+                        ID#{{ ticket.ticket_id }} - {{ ticket.ticket_name }}
+                    </button>
+                </h2>
+                <div id="testingCollapse{{ ticket.ticket_id }}" class="accordion-collapse collapse"
+                    aria-labelledby="testingHeading{{ ticket.ticket_id }}" data-bs-parent="#testingAccordion">
+                    <div class="accordion-body">
+                        <strong>Description:</strong> {{ ticket.description }}
+                        <br>
+                        <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
+                        <br>
+                        <strong>Workload:</strong> {{ ticket.workload }}
+                        <br>
+                        <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
+                            style="margin-top: 10px;">Edit ticket</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="col" style="margin-right: 10px;">
+    <div class="col" style="margin-left: 10px;">
         <h3>Finished/Obsolete</h3>
         <div class="accordion" id="finishedObsoleteAccordion">
             {% for ticket in finished_obsolete %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="finishedObsoleteHeading{{ ticket.id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#finishedObsoleteCollapse{{ ticket.id }}" aria-expanded="false" aria-controls="finishedObsoleteCollapse{{ ticket.id }}">
-                            {{ ticket.ticket_name }}
-                        </button>
-                    </h2>
-                    <div id="finishedObsoleteCollapse{{ ticket.id }}" class="accordion-collapse collapse" aria-labelledby="finishedObsoleteHeading{{ ticket.id }}" data-bs-parent="#finishedObsoleteAccordion">
-                        <div class="accordion-body">
-                            {{ ticket.ticket_description }}
-                        </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="finishedObsoleteHeading{{ ticket.ticket_id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#finishedObsoleteCollapse{{ ticket.ticket_id }}" aria-expanded="false"
+                        aria-controls="finishedObsoleteCollapse{{ ticket.ticket_id }}">
+                        ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
+                    </button>
+                </h2>
+                <div id="finishedObsoleteCollapse{{ ticket.ticket_id }}" class="accordion-collapse collapse"
+                    aria-labelledby="finishedObsoleteHeading{{ ticket.ticket_id }}"
+                    data-bs-parent="#finishedObsoleteAccordion">
+                    <div class="accordion-body">
+                        <strong>Description:</strong> {{ ticket.description }}
+                        <br>
+                        <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
+                        <br>
+                        <strong>Workload:</strong> {{ ticket.workload }}
+                        <br>
+                        <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
+                            style="margin-top: 10px;">Edit ticket</a>
+
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
+
+    <!-- Similar sections for other ticket status categories -->
+
+</div>
+
 </div>
 {% endblock %}

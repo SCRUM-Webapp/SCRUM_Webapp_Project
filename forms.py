@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, SubmitField, HiddenField, PasswordField, EmailField
+from wtforms.fields import StringField, SubmitField, HiddenField, PasswordField, EmailField, IntegerField, FloatField, SelectField
 from wtforms.validators import InputRequired, Length, Email
 
 class LoginForm(FlaskForm):
@@ -15,6 +15,25 @@ class RegisterForm(FlaskForm):
 
 class TicketForm(FlaskForm):
     ticket_id = HiddenField('Ticket ID')
-    title = StringField('Title', validators=[InputRequired(), Length(min=3, max=30)])
+    ticket_name = StringField('Ticket_Name', validators=[InputRequired(), Length(min=3, max=30)])
     description = StringField('Description', validators=[InputRequired(), Length(min=3, max=100)])
+    sprint_number = IntegerField('Sprint Number')
+    workload = FloatField('Workload')
+    ticket_status = StringField('Ticket Status')
+    product_sprint_select = SelectField('Product-Backlog/Sprint-Planning', choices=[
+        ('productBacklog', 'Product-Backlog'),
+        ('sprintPlanning', 'Sprint-Planning')
+    ])
+    backlog_select = SelectField('Backlog Status', choices=[
+        ('Inbox', 'Inbox'),
+        ('Analyze', 'Analyze'),
+        ('Ready for Sprint', 'Ready for Sprint'),
+        ('Next Sprint', 'Next Sprint')
+    ])
+    sprint_select = SelectField('Sprint Status', choices=[
+        ('To-Do', 'To-Do'),
+        ('In Progress', 'In Progress'),
+        ('Testing', 'Testing'),
+        ('Finished/Obsolete', 'Finished/Obsolete')
+    ])
     submit = SubmitField('Save')
