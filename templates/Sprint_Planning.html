@@ -29,7 +29,7 @@
 {% block CONTENT %}
 <div class="row">
     <div class="col" style="margin-left: 10px;">
-        <h3>To-Do</h3>
+        <h3 style="text-align: center;">To-Do</h3>
         <div class="accordion" id="toDoAccordion">
             {% for ticket in to_do %}
             <div class="accordion-item">
@@ -62,7 +62,7 @@
 
     <div class="col" style="margin-left: 10px;">
         <!-- Add similar sections for In Progress, Testing, and Finished/Obsolete -->
-        <h3>In Progress</h3>
+        <h3 style="text-align: center;">In Progress</h3>
         <div class="accordion" id="inProgressAccordion">
             {% for ticket in in_progress %}
             <div class="accordion-item">
@@ -94,7 +94,7 @@
     </div>
 
     <div class="col" style="margin-left: 10px;">
-        <h3>Testing</h3>
+        <h3 style="text-align: center;">Testing</h3>
         <div class="accordion" id="testingAccordion">
             {% for ticket in testing %}
             <div class="accordion-item">
@@ -126,7 +126,7 @@
     </div>
 
     <div class="col" style="margin-left: 10px;">
-        <h3>Finished/Obsolete</h3>
+        <h3 style="text-align: center;">Finished/Obsolete</h3>
         <div class="accordion" id="finishedObsoleteAccordion">
             {% for ticket in finished_obsolete %}
             <div class="accordion-item">

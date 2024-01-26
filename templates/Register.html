@@ -24,7 +24,14 @@
                     {{ form.password(class="form-control") }}
                 </div>
 
-                {{ form.submit(class="btn btn-primary", style="margin-top: 15px;") }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.submit(class="btn btn-primary", style="margin-top: 15px;") }}
+                    </div>
+                    <div class="col">
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-secondary" style="margin-top: 15px; width: 200px"> Login</a>
+                    </div>
+                </div>
                 
             </fieldset>
         </form>
