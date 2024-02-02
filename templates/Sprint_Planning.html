@@ -134,6 +134,12 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#finishedObsoleteCollapse{{ ticket.ticket_id }}" aria-expanded="false"
                         aria-controls="finishedObsoleteCollapse{{ ticket.ticket_id }}">
+                        <!-- if statement needs to get value from db -->
+                        {%if false%}
+                        <span class="badge bg-success me-1" >Finished</span>
+                        {%else%}
+                        <span class="badge bg-warning me-1" >Obsolete</span>
+                        {%endif%}
                         ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
                     </button>
                 </h2>
