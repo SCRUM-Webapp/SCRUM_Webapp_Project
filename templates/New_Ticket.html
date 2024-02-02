@@ -10,6 +10,7 @@
         {{ form.hidden_tag() }}
         <fieldset>
             <legend>New Ticket</legend>
+
             {# Ticket_ID #}
             <div class="form-group row">
                 <label for="staticTicketID" class="col-sm-2 col-form-label">Ticket-ID</label>
@@ -18,6 +19,7 @@
                         value="To be generated on submit">
                 </div>
             </div>
+
             {# TITLE #}
             <div class="form-group">
                 <label for="InputTitle" class="form-label mt-4">Title</label>
@@ -50,6 +52,7 @@
                 </select>
                 <small id="BacklogHelp" class="form-text text-muted">Which phase is this ticket in?</small>
             </div>
+
             {# Sprint number #}
             <div class="form-group" id="sprintNumberSelect" style="display:none;">
                 <label for="sprintNumberSelectField" class="form-label mt-4">Sprint Number</label>
@@ -89,6 +92,7 @@
                 <small id="StoryPointsHelp" class="form-text text-muted">How many Story-Points does this ticket
                     require?</small>
             </div>
+
             {# Notes #}
             <div class="form-group">
                 <label for="exampleTextarea" class="form-label mt-4">Notes</label>
@@ -96,6 +100,7 @@
                     aria-describedby="NotesHelp"></textarea>
                 <small id="NotesHelp" class="form-text text-muted">Any comments or notes regarding this ticket?</small>
             </div>
+            
             {# Person working on ticket #}
             <div class="form-group" id="OwnerSelect" style="display:block;">
                 <label for="OwnerSelect" class="form-label mt-4">Person working on ticket</label>

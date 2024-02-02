@@ -10,6 +10,7 @@
         {{ form.hidden_tag() }}
         <fieldset>
             <legend>Ticket-Editor</legend>
+
             {# Ticket_ID #}
             <div class="form-group row">
                 <label for="staticTicketID" class="col-sm-2 col-form-label">Ticket-ID</label>
@@ -18,6 +19,7 @@
                         value="{{ ticket.ticket_id }}">
                 </div>
             </div>
+
             {# TITLE #}
             <div class="form-group">
                 <label for="InputTitle" class="form-label mt-4">Title</label>
@@ -50,6 +52,7 @@
                 </select>
                 <small id="BacklogHelp" class="form-text text-muted">Which phase is this ticket in?</small>
             </div>
+
             {# Sprint number #}
             <div class="form-group" id="sprintNumberSelect" style="display:none;">
                 <label for="sprintNumberSelectField" class="form-label mt-4">Sprint Number</label>
@@ -74,16 +77,27 @@
                 <small id="SprintHelp" class="form-text text-muted">Which phase is this ticket in?</small>
             </div>
 
+            {# Finished/Obsolete options #}
+            <div class="form-group mt-1" id="finishedObsoleteRadio" style="display:none;">
+                <div class="btn-group" id="finishedObsoleteRadioField" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
+                    <label class="btn btn-outline-success" for="btnradio1">Finished</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="">
+                    <label class="btn btn-outline-warning" for="btnradio2">Obsolete</label>
+                </div>
+                <small id="finishedObsoleteHelp" class="form-text text-muted row ms-0">Is this ticket finished or obsolete?</small>
+            </div>
+
             {# Description #}
             <div class="form-group">
                 <label for="exampleTextarea" class="form-label mt-4">Description</label>
                 <textarea class="form-control" id="exampleTextarea" name="description" rows="3"
                     placeholder="Enter description here"
                     aria-describedby="DescriptionHelp">{{ ticket.description }}</textarea>
-
                 <small id="DescriptionHelp" class="form-text text-muted">What is this ticket about?</small>
             </div>
-            {# Story POints #}
+
+            {# Story Points #}
             <div class="form-group">
                 <label for="InputStoryPoints" class="form-label mt-4">Story-Points</label>
                 <input type="number" class="form-control" id="InputStoryPoints" aria-describedby="StoryPointsHelp"
@@ -91,6 +105,7 @@
                 <small id="StoryPointsHelp" class="form-text text-muted">How many Story-Points does this ticket
                     require?</small>
             </div>
+
             {# Notes #}
             <div class="form-group">
                 <label for="exampleTextarea" class="form-label mt-4">Notes</label>
@@ -98,6 +113,7 @@
                     aria-describedby="NotesHelp"></textarea>
                 <small id="NotesHelp" class="form-text text-muted">Any comments or notes regarding this ticket?</small>
             </div>
+
             {# Person working on ticket #}
             <div class="form-group" id="OwnerSelect" style="display:block;">
                 <label for="OwnerSelect" class="form-label mt-4">Person working on ticket</label>
@@ -125,6 +141,7 @@
     window.onload = function () {
         displaySecondSelect();
         document.getElementById('ProductSprintSelect').addEventListener('change', displaySecondSelect);
+        document.getElementById('sprintSelectField').addEventListener('change', displaySecondSelect);
     };
 
     function displaySecondSelect() {
@@ -132,6 +149,8 @@
         var backlogSelect = document.getElementById('productBacklogSelect');
         var sprintColumnSelect = document.getElementById('sprintPlanningSelect');
         var sprintNumberSelect = document.getElementById('sprintNumberSelect');
+        var finishedObsoleteSelect = document.getElementById('finishedObsoleteRadio');
+        var sprintStatus = document.getElementById('sprintSelectField').value;
 
         if (selectValue === 'productBacklog') {
             backlogSelect.style.display = 'block';
@@ -141,6 +160,11 @@
             sprintColumnSelect.style.display = 'block';
             backlogSelect.style.display = 'none';
             sprintNumberSelect.style.display = 'block';
+            if (sprintStatus === 'Finished/Obsolete') {
+                finishedObsoleteSelect.style.display = 'block';
+            } else {
+                finishedObsoleteSelect.style.display = 'none';
+            }
         } else {
             backlogSelect.style.display = 'none';
             sprintColumnSelect.style.display = 'none';
