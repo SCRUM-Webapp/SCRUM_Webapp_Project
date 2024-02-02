@@ -109,6 +109,8 @@ def new_ticket():
         db.session.add(new_ticket)
         db.session.commit()
         return redirect(url_for('product_backlog'))
+    elif request.method == 'POST' and not form.validate_on_submit():
+        flash('Title and Description are required fields. Please fill them out.')
 
     return render_template('New_Ticket.html', form=form)
 

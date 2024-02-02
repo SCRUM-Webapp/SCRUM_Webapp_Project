@@ -4,7 +4,6 @@
 <div class="d-flex justify-content-center">
     <div style="margin-bottom: 35px;">
         <ul class="nav nav-tabs" role="tablist">
-            <!-- Add your sprint tabs here -->
             <li class="nav-item" role="presentation">
                 <a class="nav-link {% if selected_sprint == 1 %}active{% endif %}"
                     href="{{ url_for('sprint_planning', selected_sprint=1) }}" role="tab">Sprint 1</a>
@@ -29,7 +28,7 @@
 {% block CONTENT %}
 <div class="row">
     <div class="col" style="margin-left: 10px;">
-        <h3>To-Do</h3>
+        <h3 style="text-align: center;">To-Do</h3>
         <div class="accordion" id="toDoAccordion">
             {% for ticket in to_do %}
             <div class="accordion-item">
@@ -62,7 +61,7 @@
 
     <div class="col" style="margin-left: 10px;">
         <!-- Add similar sections for In Progress, Testing, and Finished/Obsolete -->
-        <h3>In Progress</h3>
+        <h3 style="text-align: center;">In Progress</h3>
         <div class="accordion" id="inProgressAccordion">
             {% for ticket in in_progress %}
             <div class="accordion-item">
@@ -94,7 +93,7 @@
     </div>
 
     <div class="col" style="margin-left: 10px;">
-        <h3>Testing</h3>
+        <h3 style="text-align: center;">Testing</h3>
         <div class="accordion" id="testingAccordion">
             {% for ticket in testing %}
             <div class="accordion-item">
@@ -125,8 +124,8 @@
         </div>
     </div>
 
-    <div class="col" style="margin-left: 10px;">
-        <h3>Finished/Obsolete</h3>
+    <div class="col" style="margin-right: 10px;">
+        <h3 style="text-align: center;">Finished/Obsolete</h3>
         <div class="accordion" id="finishedObsoleteAccordion">
             {% for ticket in finished_obsolete %}
             <div class="accordion-item">
@@ -134,6 +133,12 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#finishedObsoleteCollapse{{ ticket.ticket_id }}" aria-expanded="false"
                         aria-controls="finishedObsoleteCollapse{{ ticket.ticket_id }}">
+                        <!-- if statement needs to get value from db -->
+                        {%if false%}
+                        <span class="badge bg-success me-1" >Finished</span>
+                        {%else%}
+                        <span class="badge bg-warning me-1" >Obsolete</span>
+                        {%endif%}
                         ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
                     </button>
                 </h2>

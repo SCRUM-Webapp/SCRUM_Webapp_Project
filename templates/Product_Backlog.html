@@ -7,7 +7,7 @@
 {% block CONTENT %}
 <div class="row">
     <div class="col" style="margin-left: 10px;">
-        <h3>Inbox</h3>
+        <h3 style="text-align: center;">Inbox</h3>
         <div class="accordion" id="accordionExample">
             {% for ticket in inbox_tickets %}
             <div class="accordion-item">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="col">
-        <h3>Analyze</h3>
+        <h3 style="text-align: center;">Analyze</h3>
         <div class="accordion" id="accordionAnalyze">
             {% for ticket in analyze_tickets %}
             <div class="accordion-item">
@@ -71,7 +71,7 @@
     </div>
 
     <div class="col">
-        <h3>Ready for Sprint</h3>
+        <h3 style="text-align: center;">Ready for Sprint</h3>
         <div class="accordion" id="accordionReady">
             {% for ticket in ready_for_sprint_tickets %}
             <div class="accordion-item">
@@ -103,7 +103,7 @@
     </div>
 
     <div class="col" style="margin-right: 10px;">
-        <h3>Next Sprint</h3>
+        <h3 style="text-align: center;">Next Sprint</h3>
         <div class="accordion" id="accordionNext">
             {% for ticket in next_sprint_tickets %}
             <div class="accordion-item">
