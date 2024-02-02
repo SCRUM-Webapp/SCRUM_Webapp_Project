@@ -48,8 +48,9 @@
 <header>{% block HEADER %}{% endblock %}</header>
 
     <main>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
     {{ render_messages(dismissible=True, dismiss_animate=True) }}
-    <!-- Hier war noch render messages -->
+    </div>
         {% block CONTENT %}{% endblock %}
     </main>
 
