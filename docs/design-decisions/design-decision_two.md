@@ -42,6 +42,8 @@ We regarded two alternative options:
 + Plain SQL statements
 + SQLAlchemy
 
+### Assessment
+
  | Pro SQLAlchemy: | Con SQLAlchemy |
  | :-- | :-- | 
  | ✔️ Object oriented programming | ❌ Takes time to learn |
