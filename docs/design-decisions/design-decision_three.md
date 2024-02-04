@@ -1,5 +1,5 @@
 ---
-title: Design Decision 1
+title: Design Decision 3
 parent: Design Decisions
 nav_order: 3
 ---
@@ -17,7 +17,7 @@ Vasco
 {: toc }
 </details>
 
-## 01: Session management
+## 03: Session management
 
 ### Meta
 
