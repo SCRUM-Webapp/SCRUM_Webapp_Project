@@ -37,6 +37,12 @@ We decided to opt for the seperate page since it requires less knowledge of Java
 
 ### Regarded options
 
++ Using Bootstrap modals with JavaScript
++ Using Bootstrap modals with  HTML/CSS
++ Redirecting the user to a seperate editing page
+
+### Assessment
+
 **Option 1: Using Bootstrap modals with JavaScript**
 - Requires knowledge of JavaScript and AJAX technique
 - would be more complex
