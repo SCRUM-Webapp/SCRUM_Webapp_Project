@@ -1,5 +1,5 @@
 ---
-title: Design Decision 1
+title: Design Decision 3
 parent: Design Decisions
 nav_order: 3
 ---
@@ -17,7 +17,7 @@ Vasco
 {: toc }
 </details>
 
-## 01: Session management
+## 03: Session management
 
 ### Meta
 
@@ -29,7 +29,7 @@ Updated
 
 ### Problem statement
 
-When the user successfully logs in his user-ID gets stored in the session. Now the question is: Does the user have to log in again after a certain amount of time or does he not have to log in again.  
+When the user successfully logs in, his user-ID gets stored in the session. Now the question is: Does the user have to log in again after a certain amount of time or does he not have to log in again.  
 This is a question of user experience and security since an expiring session could annoy the user leading him to not use the webapp anymore but at the same time this could also be a safety concern.
 
 ### Decision
@@ -45,7 +45,7 @@ We decided to let the user stay logged in for 7 days without any interaction wit
 
 | Pro Expiration: | Con Expiration |
  | :-- | :-- | 
- | ✔️ increased window of opportunity for unauthorized access | ❌ user doesn't need to authenticate frequently |
+ | ✔️ decreased window of opportunity for unauthorized access | ❌ user doesn't need to authenticate frequently |
  | ✔️ Might (if actually launched) create problems with regulations | ❌ reduces "friction" for returning users so they can just continue where they stopped last time |
  | ✔️ when session is hijacked there is no limit to how long the hijacker can use the session | ❌ Could make the user more likely to use our product frequently |
  | ✔️ many open sessions increases consumed server ressources | |

@@ -1,11 +1,11 @@
 ---
 title: Peer Review
 parent: Team Evaluation
-nav_order: 3
+nav_order: 5
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas
 
 # [Peer review]
 {: .no_toc }
@@ -17,16 +17,16 @@ nav_order: 3
 {: toc }
 </details>
 
-## [team member] - review 1
+## Nicolas Jobstvogt
 
-### My observation (Wahrnehmung)
+### My observation
 
-[A specific observation, regarding know-how, effectiveness, team work or from another relevant area]
+- 
 
-### Effect on me (Wirkung)
+### Effect on me
 
 [What positive or negative effect did this observation have on the reviewer?]
 
-### Tip for the future (Wunsch)
+### Tip for the future
 
 [What should be changed or strengthened for the point of view of the reviewer? ]

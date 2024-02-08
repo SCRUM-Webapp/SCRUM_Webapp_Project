@@ -10,13 +10,6 @@ nav_order: 4
 # [Reference documentation]
 {: .no_toc }
 
-{: .attention }
-> This page collects internal functions, routes with their functions, and APIs (if any).
-> 
-> See [Uber](https://developer.uber.com/docs/drivers/references/api) or [PayPal](https://developer.paypal.com/api/rest/) for exemplary high-quality API reference documentation.
->
-> You may delete this `attention` box.
-
 <details open markdown="block">
 {: .text-delta }
 <summary>Table of contents</summary>
@@ -33,6 +26,20 @@ nav_order: 4
 **Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
 
 **Purpose:** [Short explanation of what the function does and why]
+
+**Sample output:**
+
+[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
+
+---
+
+### `index()`
+
+**Route:** `/`
+
+**Methods:**
+
+**Purpose:** Displays the users dashboard. Welcomes the user with his username and a different greeting depending on which time it is.
 
 **Sample output:**
 
