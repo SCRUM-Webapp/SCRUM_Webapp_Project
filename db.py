@@ -17,6 +17,8 @@ class Ticket(db.Model):
     workload = db.Column(db.Float)
     description = db.Column(db.Text)
     ticket_status = db.Column(db.String(17), default='Inbox') #Inbox, Analyze, Ready for Sprint, Next Sprint // To-Do, In Progress, Testing, Finished/Obsolete
+    assigned = db.Column(db.String(30))
+    notes = db.Column(db.Text)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'

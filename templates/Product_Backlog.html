@@ -30,9 +30,18 @@ Product Backlog
                         <br>
                         <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
                         <br>
+                        <strong>Notes:</strong> {{ ticket.notes }}
+                        <br>
                         <strong>Workload:</strong> {{ ticket.workload }}
                         <br>
                         <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <strong>Assigned:</strong>
+                        {% if ticket.assigned is not none %}
+                        {{ ticket.assigned }}
+                        {% else %}
+                        None
+                        {% endif %}
                         <br>
                         <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
                             style="margin-top: 10px;">Edit ticket</a>
@@ -62,9 +71,18 @@ Product Backlog
                         <br>
                         <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
                         <br>
+                        <strong>Notes:</strong> {{ ticket.notes }}
+                        <br>
                         <strong>Workload:</strong> {{ ticket.workload }}
                         <br>
                         <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <strong>Assigned:</strong>
+                        {% if ticket.assigned is not none %}
+                        {{ ticket.assigned }}
+                        {% else %}
+                        None
+                        {% endif %}
                         <br>
                         <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
                             style="margin-top: 10px;">Edit ticket</a>
@@ -94,9 +112,18 @@ Product Backlog
                         <br>
                         <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
                         <br>
+                        <strong>Notes:</strong> {{ ticket.notes }}
+                        <br>
                         <strong>Workload:</strong> {{ ticket.workload }}
                         <br>
                         <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <strong>Assigned:</strong>
+                        {% if ticket.assigned is not none %}
+                        {{ ticket.assigned }}
+                        {% else %}
+                        None
+                        {% endif %}
                         <br>
                         <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
                             style="margin-top: 10px;">Edit ticket</a>
@@ -126,9 +153,18 @@ Product Backlog
                         <br>
                         <strong>Sprint Number:</strong> {{ ticket.sprint_number }}
                         <br>
+                        <strong>Notes:</strong> {{ ticket.notes }}
+                        <br>
                         <strong>Workload:</strong> {{ ticket.workload }}
                         <br>
                         <strong>Status:</strong> {{ ticket.ticket_status }}
+                        <br>
+                        <strong>Assigned:</strong>
+                        {% if ticket.assigned is not none %}
+                        {{ ticket.assigned }}
+                        {% else %}
+                        None
+                        {% endif %}
                         <br>
                         <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
                             style="margin-top: 10px;">Edit ticket</a>

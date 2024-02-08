@@ -5,19 +5,21 @@ User Dashboard
 {% endblock %}
 
 {% block CONTENT %}
-    <div class="d-flex flex-column align-items-center justify-content-center" style="height: 80vh; width: 100vw;">
-        <h1>Good {{time_of_day}} {{username}}!</h1>
-        <img src="../static/images/People_waving.jpg" alt="people waving" style="width: 560px; height: 350px; margin-bottom: 20px; margin-top: 20px; border-radius: 20px;"/>
-        <p>You are currently viewing Team <b>"Sprint-Flitzer"</b>:</p>
-        <p>What do you want to access?</p>
-        <div class="row">
-            <div class="col-6">
-                <a href="{{url_for('product_backlog')}}" class="btn btn-primary" style="width: 150px;">Product Backlog</a>
-            </div>
-            <div class="col-6">
-                <a href="{{ url_for('sprint_planning', selected_sprint=1) }}" class="btn btn-primary" style="width: 150px;">Sprint <br> View</a>
+<div class="d-flex flex-column align-items-center justify-content-center" style="height: 80vh; width: 100vw;">
+    <h1>Good {{time_of_day}} {{username}}!</h1>
+    <img src="../static/images/People_waving.jpg" alt="people waving"
+        style="width: 560px; height: 350px; margin-bottom: 20px; margin-top: 20px; border-radius: 20px;" />
+    <p>You are currently viewing Team <b>"Sprint-Flitzer"</b>:</p>
+    <p>What do you want to access?</p>
+    <div class="row">
+        <div class="col-6">
+            <a href="{{url_for('product_backlog')}}" class="btn btn-primary" style="width: 150px;">Product Backlog</a>
+        </div>
+        <div class="col-6">
+            <a href="{{ url_for('sprint_planning', selected_sprint=1) }}" class="btn btn-primary"
+                style="width: 150px;">Sprint <br> View</a>
 
-            </div>
         </div>
     </div>
+</div>
 {% endblock %}

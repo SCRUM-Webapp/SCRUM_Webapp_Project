@@ -17,6 +17,7 @@ class TicketForm(FlaskForm):
     #ticket_id = HiddenField('Ticket ID')
     ticket_name = StringField('Ticket_Name', validators=[InputRequired(), Length(min=3, max=30)])
     description = StringField('Description', validators=[InputRequired(), Length(min=3, max=100)], render_kw={"placeholder": "What is this ticket about?"})
+    notes = StringField('Notes', render_kw={"placeholder": "Any additional informations?"})
     sprint_number = IntegerField('Sprint Number')
     workload = FloatField('Workload')
     ticket_status = StringField('Ticket Status')
@@ -36,4 +37,9 @@ class TicketForm(FlaskForm):
         ('Testing', 'Testing'),
         ('Finished/Obsolete', 'Finished/Obsolete')
     ])
+    owner_select = SelectField('Person working on this ticket', choices=[])
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from db import User
+        self.owner_select.choices = [(user.username, user.username) for user in User.query.all()]
     submit = SubmitField('Save')
