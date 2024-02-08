@@ -90,34 +90,6 @@ def register():
             return redirect(url_for('login'))
     return render_template('Register.html', form=form)
 
-@app.route('/Ticket/New_Ticket', methods=['GET', 'POST'])
-@login_required
-def new_ticket():
-    form = TicketForm(request.form)
-    
-    if form.validate_on_submit():
-        new_ticket = Ticket()
-        form.populate_obj(new_ticket)
-
-        if form.product_sprint_select.data == 'productBacklog':
-
-            new_ticket.ticket_status = form.backlog_select.data
-            new_ticket.sprint_number = None
-
-        elif form.product_sprint_select.data == 'sprintPlanning':
-            
-            new_ticket.ticket_status = form.sprint_select.data
-            new_ticket.sprint_number = form.sprint_number.data
-
-        db.session.add(new_ticket)
-        db.session.commit()
-        return redirect(url_for('product_backlog'))
-    elif request.method == 'POST' and not form.validate_on_submit():
-        flash('Title and Description are required fields. Please fill them out.')
-
-    return render_template('New_Ticket.html', form=form)
-
-
 
 from sqlalchemy import inspect
 
@@ -134,28 +106,9 @@ def product_backlog():
     print("Ready for Sprint Tickets:", ready_for_sprint_tickets)
     print("Next Sprint Tickets:", next_sprint_tickets)
 
-    #tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id)).fetchall()
-    #tickets2 = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
-    #print(tickets)
-    #print(select(Ticket))
-    #print(type(tickets))
-
-    #print(tickets2)
-    #print(type(tickets2))
-
-    # Convert the SQLAlchemy Row objects to a list of dictionaries
-    #tickets_list = [dict(ticket) for ticket in tickets]
-
-    # Pass the list of dictionaries to the template
     return render_template('Product_Backlog.html', inbox_tickets=inbox_tickets, analyze_tickets=analyze_tickets, ready_for_sprint_tickets=ready_for_sprint_tickets, next_sprint_tickets=next_sprint_tickets)
-""" @app.route('/Product_Backlog')
-@login_required
-def product_backlog():
-    #select all Tickets order by ticket_id convert to list because otherwise ChunkedIteratorResult Error when debugging
-    tickets = db.session.execute(db.select(Ticket).order_by(Ticket.ticket_id))
-    #pass the tickets to the template
-    return render_template('Product_Backlog.html', tickets=tickets) """
-    
+
+
 @app.route('/Ticket/<int:ticket_id>', methods=['GET', 'POST'])
 @login_required
 def ticket(ticket_id):
@@ -163,44 +116,91 @@ def ticket(ticket_id):
     if not ticket:
         abort(404)
 
-    form = TicketForm(obj=ticket)
+    form = TicketForm(request.form, obj=ticket)
 
     if form.validate_on_submit():
         form.populate_obj(ticket)
 
-
         if form.product_sprint_select.data == 'productBacklog':
-
-            ticket.ticket_status = form.backlog_select.data
+            # Clear sprint-related fields
             ticket.sprint_number = None
-
+            # Set ticket status based on the backlog selection
+            ticket.ticket_status = form.backlog_select.data
         elif form.product_sprint_select.data == 'sprintPlanning':
-          
-            ticket.ticket_status = form.sprint_select.data
+            # Set ticket status based on the sprint selection
+            if form.sprint_select.data == 'Finished/Obsolete':
+                # If 'Finished/Obsolete' is selected, check which radio button is checked
+                if request.form.get('btnradio') == 'Finished':
+                    ticket.ticket_status = 'Finished'
+                else:
+                    ticket.ticket_status = 'Obsolete'
+            else:
+                ticket.ticket_status = form.sprint_select.data
+            # Set sprint number
             ticket.sprint_number = form.sprint_number.data
 
         db.session.commit()
-        return redirect(url_for('product_backlog'))
+
+        # Redirect to product backlog or sprint planning based on the selection
+        if form.product_sprint_select.data == 'productBacklog':
+            return redirect(url_for('product_backlog'))
+        else:
+            return redirect(url_for('sprint_planning', selected_sprint=ticket.sprint_number))
 
     return render_template('Ticket.html', ticket=ticket, form=form)
+
+
+@app.route('/Ticket/New_Ticket', methods=['GET', 'POST'])
+@login_required
+def new_ticket():
+    form = TicketForm(request.form)
+    
+    if form.validate_on_submit():
+        new_ticket = Ticket()
+        form.populate_obj(new_ticket)
+
+        if form.product_sprint_select.data == 'productBacklog':
+            # Set ticket status based on the backlog selection
+            new_ticket.ticket_status = form.backlog_select.data
+            new_ticket.sprint_number = None
+            db.session.add(new_ticket)
+            db.session.commit()
+            flash('New ticket added to Product Backlog')
+            return redirect(url_for('product_backlog'))
+        elif form.product_sprint_select.data == 'sprintPlanning':
+            # Set ticket status based on the sprint selection
+            new_ticket.sprint_number = form.sprint_number.data
+            if form.sprint_select.data == 'Finished/Obsolete':
+                # If 'Finished/Obsolete' is selected, check which radio button is checked
+                if request.form.get('btnradio') == 'Finished':
+                    new_ticket.ticket_status = 'Finished'
+                else:
+                    new_ticket.ticket_status = 'Obsolete'
+            else:
+                new_ticket.ticket_status = form.sprint_select.data
+            db.session.add(new_ticket)
+            db.session.commit()
+            #flash('New ticket added to Sprint Planning')
+            return redirect(url_for('sprint_planning', selected_sprint=new_ticket.sprint_number))
+    elif request.method == 'POST' and not form.validate_on_submit():
+        flash('Title and Description are required fields. Please fill them out.')
+
+    return render_template('New_Ticket.html', form=form)
+
+
 
 @app.route('/Sprint_Planning/<selected_sprint>')
 @login_required
 def sprint_planning(selected_sprint):
     if selected_sprint == 'add':
-        # Handle the case when the user clicks on "+ Add Sprint"
-        # This could be a separate route or logic depending on your requirements
         pass
     else:
-        # Handle the case when a specific sprint is selected
-        # You can use the selected_sprint parameter to filter tickets
-        # and render the template accordingly
         sprint_number = int(selected_sprint)
-        # Query tickets for the selected sprint
         to_do = db.session.query(Ticket).filter_by(ticket_status='To-Do', sprint_number=sprint_number).all()
         in_progress = db.session.query(Ticket).filter_by(ticket_status='In Progress', sprint_number=sprint_number).all()
         testing = db.session.query(Ticket).filter_by(ticket_status='Testing', sprint_number=sprint_number).all()
-        finished_obsolete = db.session.query(Ticket).filter_by(ticket_status='Finished/Obsolete', sprint_number=sprint_number).all()
+        finished_obsolete = db.session.query(Ticket).filter(Ticket.ticket_status.in_(['Finished', 'Obsolete']), Ticket.sprint_number == sprint_number).all()
+
 
         return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
 
