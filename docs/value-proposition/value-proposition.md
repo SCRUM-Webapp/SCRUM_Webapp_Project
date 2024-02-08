@@ -16,13 +16,16 @@ nav_order: 1
 {: toc }
 </details>
 
-## Das Problem:
-Während dem Arbeiten an anderen Projekten für das Studium fiel es schwer den Fortschritt der anderen Teammitglieder zu teilen ohne ständige Meetings auszumachen. Außerdem fiel es schwer die Reihenfolge mit der die einzelnen Tasks abgearbeitet werden sollten zu planen besonders, wenn es dann noch Änderungen gab. Iterativ zu arbeiten, war deshalb sehr aufwendig.
+## the problem:
+When working in teams during our studies, we noticed that quickly confusion arises about what tasks need to be done, who is supposed to do them and how far the others are with their progress. There were some obvious problems and mistakes in our coordination and collaboration in general.  
+At the same time we heard a lot about "iterative working" and in particular "SCRUM". Therefore we also wanted to attain some experience in that field.
 
-## Unsere Lösung:
-Unsere Lösung ist es eine Anwendung zu erstellen, um bei zukünftigen Programmierprojekten eine Webanwendung zu haben, mit der ein SCRUM-Prozess strukturiert abgearbeitet werden kann.
+## Our Value Proposition:
+We want to create a platform for a small team to collaborate efficiently. The team should be able to view what tasks there are, who needs to do them, how far everyone else is, how much work a specific task is, what sprint that task is associated to and much more.  
+Our web application is supposed to be a starting point into the great world of iterative working. We want to integrate the basics of SCRUM but not overwhelm the user at the same time with all those other rules and guidelines.
 
 ## Zielnutzer:
-Entwickelnde, die iterativ arbeiten und dabei das SCRUM-Framework inklusive eines KANBAN-boards nutzen.
+Small software developement teams like student groups or early Start-Ups with small or nonexistant experience in iterative working, who want a "gentle" introduction into that area.
 
 ## [Customer journey]
+![Customer Journey](/SCRUM_Webapp_Project/assets/images/User_Journey_Diagram.png)
