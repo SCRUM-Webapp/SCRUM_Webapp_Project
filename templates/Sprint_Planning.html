@@ -64,7 +64,6 @@ Sprint View
     </div>
 
     <div class="col" style="margin-left: 10px;">
-        <!-- Add similar sections for In Progress, Testing, and Finished/Obsolete -->
         <h3 style="text-align: center;">In Progress</h3>
         <div class="accordion" id="inProgressAccordion">
             {% for ticket in in_progress %}
@@ -137,12 +136,11 @@ Sprint View
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#finishedObsoleteCollapse{{ ticket.ticket_id }}" aria-expanded="false"
                         aria-controls="finishedObsoleteCollapse{{ ticket.ticket_id }}">
-                        <!-- if statement needs to get value from db -->
-                        {%if false%}
-                        <span class="badge bg-success me-1" >Finished</span>
-                        {%else%}
-                        <span class="badge bg-warning me-1" >Obsolete</span>
-                        {%endif%}
+                        {% if ticket.ticket_status == 'Finished' %}
+                        <span class="badge bg-success me-1">Finished</span>
+                        {% elif ticket.ticket_status == 'Obsolete' %}
+                        <span class="badge bg-warning me-1">Obsolete</span>
+                        {% endif %}
                         ID#{{ticket.ticket_id }} - {{ ticket.ticket_name }}
                     </button>
                 </h2>
@@ -167,10 +165,6 @@ Sprint View
             {% endfor %}
         </div>
     </div>
-
-    <!-- Similar sections for other ticket status categories -->
-
 </div>
-
 </div>
 {% endblock %}

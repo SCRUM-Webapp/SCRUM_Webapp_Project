@@ -35,27 +35,27 @@ Ticket #{{ ticket.ticket_id }}
                 <label for="ProductSprintSelect" class="form-label mt-4">Product-Backlog/Sprint-Planning</label>
                 <select class="form-select" id="ProductSprintSelect" onchange="displaySecondSelect()"
                     aria-describedby="ProductSprintHelp" name="product_sprint_select">
-                    <option value="productBacklog">Product-Backlog</option>
-                    <option value="sprintPlanning">Sprint-Planning</option>
+                    <option value="productBacklog" {% if ticket.ticket_status == 'Inbox' or ticket.ticket_status == 'Analyze' or ticket.ticket_status == 'Ready for Sprint' or ticket.ticket_status == 'Next Sprint' %} selected {% endif %}>Product-Backlog</option>
+                    <option value="sprintPlanning" {% if ticket.ticket_status == 'To-Do' or ticket.ticket_status == 'In Progress' or ticket.ticket_status == 'Testing' or ticket.ticket_status == 'Finished' or ticket.ticket_status == 'Obsolete' %} selected {% endif %}>Sprint-Planning</option>
                 </select>
                 <small id="ProductSprintHelp" class="form-text text-muted">Is this ticket in the Product-Backlog or in
                     the Sprint-Planning?</small>
             </div>
 
             {# Backlog options #}
-            <div class="form-group" id="productBacklogSelect" style="display:none;">
+            <div class="form-group" id="productBacklogSelect" {% if ticket.ticket_status == 'To-Do' or ticket.ticket_status == 'In Progress' or ticket.ticket_status == 'Testing' or ticket.ticket_status == 'Finished' or ticket.ticket_status == 'Obsolete' %} style="display:none;" {% endif %}>
                 <label for="backlogSelect" class="form-label mt-4">Backlog Status</label>
                 <select class="form-select" id="backlogSelect" aria-describedby="BacklogHelp" name="backlog_select">
-                    <option>Inbox</option>
-                    <option>Analyze</option>
-                    <option>Ready for Sprint</option>
-                    <option>Next Sprint</option>
+                    <option value="Inbox" {% if ticket.ticket_status == 'Inbox' %} selected {% endif %}>Inbox</option>
+                    <option value="Analyze" {% if ticket.ticket_status == 'Analyze' %} selected {% endif %}>Analyze</option>
+                    <option value="Ready for Sprint" {% if ticket.ticket_status == 'Ready for Sprint' %} selected {% endif %}>Ready for Sprint</option>
+                    <option value="Next Sprint" {% if ticket.ticket_status == 'Next Sprint' %} selected {% endif %}>Next Sprint</option>
                 </select>
                 <small id="BacklogHelp" class="form-text text-muted">Which phase is this ticket in?</small>
             </div>
 
             {# Sprint number #}
-            <div class="form-group" id="sprintNumberSelect" style="display:none;">
+            <div class="form-group" id="sprintNumberSelect" {% if ticket.ticket_status == 'Inbox' or ticket.ticket_status == 'Analyze' or ticket.ticket_status == 'Ready for Sprint' or ticket.ticket_status == 'Next Sprint' %} style="display:none;" {% endif %}>
                 <label for="sprintNumberSelectField" class="form-label mt-4">Sprint Number</label>
                 <select class="form-select" id="sprintNumberSelectField" name="sprint_number"
                     aria-describedby="SprintHelp">
@@ -67,27 +67,28 @@ Ticket #{{ ticket.ticket_id }}
             </div>
 
             {# Sprint options #}
-            <div class="form-group" id="sprintPlanningSelect" style="display:none;">
+            <div class="form-group" id="sprintPlanningSelect" {% if ticket.ticket_status == 'Inbox' or ticket.ticket_status == 'Analyze' or ticket.ticket_status == 'Ready for Sprint' or ticket.ticket_status == 'Next Sprint' %} style="display:none;" {% endif %}>
                 <label for="sprintSelectField" class="form-label mt-4">Sprint Status</label>
                 <select class="form-select" id="sprintSelectField" aria-describedby="SprintHelp" name="sprint_select">
-                    <option>To-Do</option>
-                    <option>In Progress</option>
-                    <option>Testing</option>
-                    <option>Finished/Obsolete</option>
+                    <option value="To-Do" {% if ticket.ticket_status == 'To-Do' %} selected {% endif %}>To-Do</option>
+                    <option value="In Progress" {% if ticket.ticket_status == 'In Progress' %} selected {% endif %}>In Progress</option>
+                    <option value="Testing" {% if ticket.ticket_status == 'Testing' %} selected {% endif %}>Testing</option>
+                    <option value="Finished/Obsolete" {% if ticket.ticket_status == 'Finished' or ticket.ticket_status == 'Obsolete' %} selected {% endif %}>Finished/Obsolete</option>
                 </select>
                 <small id="SprintHelp" class="form-text text-muted">Which phase is this ticket in?</small>
             </div>
 
             {# Finished/Obsolete options #}
-            <div class="form-group mt-1" id="finishedObsoleteRadio" style="display:none;">
-                <div class="btn-group" id="finishedObsoleteRadioField" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
-                    <label class="btn btn-outline-success" for="btnradio1">Finished</label>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="">
-                    <label class="btn btn-outline-warning" for="btnradio2">Obsolete</label>
-                </div>
-                <small id="finishedObsoleteHelp" class="form-text text-muted row ms-0">Is this ticket finished or obsolete?</small>
-            </div>
+           <div class="form-group mt-1" id="finishedObsoleteRadio">
+    <div class="btn-group" id="finishedObsoleteRadioField" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="Finished" {% if ticket.ticket_status == 'Finished' %}checked{% endif %} autocomplete="off">
+        <label class="btn btn-outline-success" for="btnradio1">Finished</label>
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="Obsolete" {% if ticket.ticket_status == 'Obsolete' %}checked{% endif %} autocomplete="off">
+        <label class="btn btn-outline-warning" for="btnradio2">Obsolete</label>
+    </div>
+    <small id="finishedObsoleteHelp" class="form-text text-muted row ms-0">Is this ticket finished or obsolete?</small>
+</div>
+
 
             {# Description #}
             <div class="form-group">
