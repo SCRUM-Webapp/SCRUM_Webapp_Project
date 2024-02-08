@@ -87,6 +87,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash('Your account has been succesfully created, please login.')
+            # Redirect to update_user_list route to update choices
             return redirect(url_for('login'))
     return render_template('Register.html', form=form)
 
@@ -101,10 +102,14 @@ def product_backlog():
     analyze_tickets = db.session.query(Ticket).filter_by(ticket_status='Analyze', sprint_number=None).order_by(Ticket.ticket_id).all()
     ready_for_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Ready for Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
     next_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Next Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
-    print("Inbox Tickets:", inbox_tickets)
-    print("Analyze Tickets:", analyze_tickets)
-    print("Ready for Sprint Tickets:", ready_for_sprint_tickets)
-    print("Next Sprint Tickets:", next_sprint_tickets)
+    for ticket in inbox_tickets:
+        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
+    for ticket in analyze_tickets:
+        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
+    for ticket in ready_for_sprint_tickets:
+        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
+    for ticket in next_sprint_tickets:
+        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
 
     return render_template('Product_Backlog.html', inbox_tickets=inbox_tickets, analyze_tickets=analyze_tickets, ready_for_sprint_tickets=ready_for_sprint_tickets, next_sprint_tickets=next_sprint_tickets)
 
@@ -120,6 +125,8 @@ def ticket(ticket_id):
 
     if form.validate_on_submit():
         form.populate_obj(ticket)
+
+        ticket.assigned = form.owner_select.data
 
         if form.product_sprint_select.data == 'productBacklog':
             # Clear sprint-related fields
@@ -149,15 +156,38 @@ def ticket(ticket_id):
 
     return render_template('Ticket.html', ticket=ticket, form=form)
 
+@app.route('/Ticket/Delete/<int:ticket_id>', methods=['POST'])
+@login_required
+def delete_ticket(ticket_id):
+    print(f"Attempting to delete ticket with ID: {ticket_id}")
+
+    ticket = Ticket.query.get(ticket_id)
+    if not ticket:
+        print("Ticket not found.")
+        abort(404, description='Ticket not found')
+
+    db.session.delete(ticket)
+    try:
+        db.session.commit()
+        print("Ticket deletion successful.")
+    except Exception as e:
+        print(f"Error occurred while deleting ticket: {e}")
+        db.session.rollback()
+        abort(500, description='Failed to delete ticket')
+    return redirect(url_for('product_backlog'))
+
 
 @app.route('/Ticket/New_Ticket', methods=['GET', 'POST'])
 @login_required
 def new_ticket():
     form = TicketForm(request.form)
-    
+    print("Choices for owner_select:", form.owner_select.choices)
+
     if form.validate_on_submit():
         new_ticket = Ticket()
         form.populate_obj(new_ticket)
+
+        new_ticket.assigned = form.owner_select.data
 
         if form.product_sprint_select.data == 'productBacklog':
             # Set ticket status based on the backlog selection
@@ -165,7 +195,7 @@ def new_ticket():
             new_ticket.sprint_number = None
             db.session.add(new_ticket)
             db.session.commit()
-            flash('New ticket added to Product Backlog')
+            #flash('New ticket added to Product Backlog')
             return redirect(url_for('product_backlog'))
         elif form.product_sprint_select.data == 'sprintPlanning':
             # Set ticket status based on the sprint selection
@@ -182,7 +212,7 @@ def new_ticket():
             db.session.commit()
             #flash('New ticket added to Sprint Planning')
             return redirect(url_for('sprint_planning', selected_sprint=new_ticket.sprint_number))
-    elif request.method == 'POST' and not form.validate_on_submit():
+    elif request.method == 'POST' and (not form.ticket_name.data.strip() or not form.description.data.strip()):
         flash('Title and Description are required fields. Please fill them out.')
 
     return render_template('New_Ticket.html', form=form)
