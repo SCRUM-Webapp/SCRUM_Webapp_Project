@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, SubmitField, HiddenField, PasswordField, EmailField, IntegerField, FloatField, SelectField
-from wtforms.validators import InputRequired, Length, Email
+from wtforms.validators import InputRequired, Length, Email, Optional
 
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[InputRequired(), Email(), Length(min=3, max=50)], render_kw={"placeholder": "Enter email"})
@@ -19,7 +19,7 @@ class TicketForm(FlaskForm):
     description = StringField('Description', validators=[InputRequired(), Length(min=3, max=300)], render_kw={"placeholder": "What is this ticket about?"})
     notes = StringField('Notes', render_kw={"placeholder": "Any additional informations?"})
     sprint_number = IntegerField('Sprint Number')
-    workload = FloatField('Workload')
+    workload = FloatField('Workload',validators=[Optional()])
     ticket_status = StringField('Ticket Status')
     product_sprint_select = SelectField('Product-Backlog/Sprint-Planning', choices=[
         ('productBacklog', 'Product-Backlog'),
