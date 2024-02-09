@@ -24,8 +24,7 @@ Ticket #{{ ticket.ticket_id }}
             {# TITLE #}
             <div class="form-group">
                 <label for="InputTitle" class="form-label mt-4">Title</label>
-                {{ form.ticket_name(class="form-control", id="InputTitle", placeholder="Enter the ticket's title here")
-                }}
+                {{ form.ticket_name(class="form-control", id="InputTitle", placeholder="Enter the ticket's title here")}}
                 <small id="titleHelp" class="form-text text-muted">This title will be displayed in the
                     Product-Backlog/Sprint-Planning page</small>
             </div>
@@ -50,8 +49,8 @@ Ticket #{{ ticket.ticket_id }}
             {# Backlog options #}
             <div class="form-group" id="productBacklogSelect" {% if ticket.ticket_status=='To-Do' or
                 ticket.ticket_status=='In Progress' or ticket.ticket_status=='Testing' or
-                ticket.ticket_status=='Finished' or ticket.ticket_status=='Obsolete' %} style="display:none;" {% endif
-                %}>
+                ticket.ticket_status=='Finished' or ticket.ticket_status=='Obsolete' %} style="display:none;"
+                {% endif%}>
                 <label for="backlogSelect" class="form-label mt-4">Backlog Status</label>
                 <select class="form-select" id="backlogSelect" aria-describedby="BacklogHelp" name="backlog_select">
                     <option value="Inbox" {% if ticket.ticket_status=='Inbox' %} selected {% endif %}>Inbox</option>
@@ -115,8 +114,7 @@ Ticket #{{ ticket.ticket_id }}
             {# Description #}
             <div class="form-group">
                 <label for="description" class="form-label mt-4">Description</label>
-                {{ form.description(class="form-control", id="description", rows="5", placeholder="Enter description
-                here") }}
+                {{ form.description(class="form-control", id="description", rows="5", placeholder="Enter description here") }}
                 <small id="DescriptionHelp" class="form-text text-muted">What is this ticket about?</small>
             </div>
 
