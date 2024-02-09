@@ -153,21 +153,30 @@ Ticket #{{ ticket.ticket_id }}
 
 {% endblock %}
 {% block SCRIPTS %}
+<!-- Script to display the second select field based on the first select field -->
 <script>
+    // adds an event listener to the window to call the function when the page is loaded
     window.onload = function () {
+        // calls the function managing the optional select fields as soon as the page is loaded
         displaySecondSelect();
+        // adds an event listener to the PB/SV select field to call the function when the value is changed
         document.getElementById('ProductSprintSelect').addEventListener('change', displaySecondSelect);
+        // adds an event listener to the sprint select field to call the function when the value is changed
         document.getElementById('sprintSelectField').addEventListener('change', displaySecondSelect);
     };
 
     function displaySecondSelect() {
+        // these two lines get the value of the first select field and the sprint status select field
         var selectValue = document.getElementById('ProductSprintSelect').value;
+        var sprintStatus = document.getElementById('sprintSelectField').value;
+
+        // these lines save the divs of the optional select fields in variables so they can be manipulated later
         var backlogSelect = document.getElementById('productBacklogSelect');
         var sprintColumnSelect = document.getElementById('sprintPlanningSelect');
         var sprintNumberSelect = document.getElementById('sprintNumberSelect');
         var finishedObsoleteSelect = document.getElementById('finishedObsoleteRadio');
-        var sprintStatus = document.getElementById('sprintSelectField').value;
 
+        // these lines define whether the optional select fields are displayed based on the value of the first select field
         if (selectValue === 'productBacklog') {
             backlogSelect.style.display = 'block';
             sprintColumnSelect.style.display = 'none';

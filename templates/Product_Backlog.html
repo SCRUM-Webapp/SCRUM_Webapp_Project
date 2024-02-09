@@ -1,19 +1,24 @@
 {% extends 'Base.html'%}
 
+<!-- Title of the page -->
 {% block TITLE %}
 Product Backlog
 {% endblock %}
 
+<!-- this block is for the add new item button -->
 {%block ADDNEWITEM%}
 <a href="{{ url_for('new_ticket') }}" class="btn btn-outline-primary mb-1" style="margin-top: 10px;">+ Add new
     ticket</a>
 {%endblock%}
 
+<!--  this is the code displaying the accordions -->
 {% block CONTENT %}
 <div class="row">
+    <!-- first column(Inbox) -->
     <div class="col" style="margin-left: 10px;">
         <h3 style="text-align: center;">Inbox</h3>
         <div class="accordion" id="accordionExample">
+            <!-- for-loop to display all the tickets that are in the inbox; inbox_tickets is defined in app.py -->
             {% for ticket in inbox_tickets %}
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading{{ ticket.ticket_id }}">
@@ -25,6 +30,7 @@ Product Backlog
                 </h2>
                 <div id="collapse{{ ticket.ticket_id }}" class="accordion-collapse collapse"
                     aria-labelledby="heading{{ ticket.ticket_id }}" data-bs-parent="#accordionExample">
+                    <!-- the body of the accordion; displaying all the tickets attributes -->
                     <div class="accordion-body">
                         <strong>Description:</strong> {{ ticket.description }}
                         <br>
@@ -37,12 +43,14 @@ Product Backlog
                         <strong>Status:</strong> {{ ticket.ticket_status }}
                         <br>
                         <strong>Assigned:</strong>
+                        <!-- if the ticket is not assigned to anyone, it will display "None" -->
                         {% if ticket.assigned is not none %}
                         {{ ticket.assigned }}
                         {% else %}
                         None
                         {% endif %}
                         <br>
+                        <!-- button to edit the ticket -->
                         <a href="{{ url_for('ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-outline-primary"
                             style="margin-top: 10px;">Edit ticket</a>
                     </div>
@@ -52,9 +60,11 @@ Product Backlog
         </div>
     </div>
 
+    <!-- second column(Analyze) -->
     <div class="col">
         <h3 style="text-align: center;">Analyze</h3>
         <div class="accordion" id="accordionAnalyze">
+            <!-- for-loop to display all the tickets that are in the analyze; analyze_tickets is defined in app.py -->
             {% for ticket in analyze_tickets %}
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingAnalyze{{ ticket.ticket_id }}">
@@ -66,6 +76,7 @@ Product Backlog
                 </h2>
                 <div id="collapseAnalyze{{ ticket.ticket_id }}" class="accordion-collapse collapse"
                     aria-labelledby="headingAnalyze{{ ticket.ticket_id }}" data-bs-parent="#accordionAnalyze">
+                    <!-- the body of the accordion; displaying all the tickets attributes -->
                     <div class="accordion-body">
                         <strong>Description:</strong> {{ ticket.description }}
                         <br>
@@ -78,6 +89,7 @@ Product Backlog
                         <strong>Status:</strong> {{ ticket.ticket_status }}
                         <br>
                         <strong>Assigned:</strong>
+                        <!-- if the ticket is not assigned to anyone, it will display "None" -->
                         {% if ticket.assigned is not none %}
                         {{ ticket.assigned }}
                         {% else %}
@@ -93,6 +105,7 @@ Product Backlog
         </div>
     </div>
 
+    <!-- third column(Ready for Sprint); logic is the same as the ones above (see their comments) -->
     <div class="col">
         <h3 style="text-align: center;">Ready for Sprint</h3>
         <div class="accordion" id="accordionReady">
