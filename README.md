@@ -41,4 +41,7 @@ Step 6: Run the application:
 ```
 flask run
 ```
-Step 7: Visit the address showing on the console
+Step 7: Visit the address showing on the console  
+  
+Step 8: We have purposely not added any example tickets with `insert_sample()` so create some of your own tickets and:  
+Have fun!!!
