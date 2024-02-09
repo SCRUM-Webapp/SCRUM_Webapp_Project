@@ -8,11 +8,12 @@ New Ticket Form
 
 <div class="container" style="margin: 30px;">
     <form method="POST" action="{{ url_for('new_ticket') }}">
+        <!-- adding hidden_tag() to prevent CSRF attacks -->
         {{ form.hidden_tag() }}
         <fieldset>
             <legend>New Ticket</legend>
 
-            {# Ticket_ID #}
+            {# TICKET_ID #}
             <div class="form-group row">
                 <label for="staticTicketID" class="col-sm-2 col-form-label">Ticket-ID</label>
                 <div class="col-sm-10">
@@ -123,7 +124,7 @@ New Ticket Form
                 <small id="ownerHelp" class="form-text text-muted">Who is working on this ticket?</small>
             </div>
 
-
+            {# Submit button #}
             <div class="form-group row" style="margin-top: 25px; margin-left: 0px">
                 <a href="{{ url_for('product_backlog') }}" class="btn btn-secondary col-sm-1"
                     style="margin-left: 25px; margin-right: 25px">Cancel</a>
@@ -135,25 +136,35 @@ New Ticket Form
 
 {% endblock %}
 {% block SCRIPTS %}
+<!-- Script to display the second select field based on the first select field -->
 <script>
+    // adds an event listener to the window to call the function when the page is loaded
     window.onload = function () {
+        // calls the function managing the optional select fields as soon as the page is loaded
         displaySecondSelect();
+        // adds an event listener to the PB/SV select field to call the function when the value is changed
         document.getElementById('ProductSprintSelect').addEventListener('change', displaySecondSelect);
+        // adds an event listener to the sprint select field to call the function when the value is changed
         document.getElementById('sprintSelectField').addEventListener('change', displaySecondSelect);
     };
 
     function displaySecondSelect() {
+        // these two lines get the value of the first select field and the sprint status select field
         var selectValue = document.getElementById('ProductSprintSelect').value;
+        var sprintStatus = document.getElementById('sprintSelectField').value;
+
+        // these lines save the divs of the optional select fields in variables so they can be manipulated later
         var backlogSelect = document.getElementById('productBacklogSelect');
         var sprintColumnSelect = document.getElementById('sprintPlanningSelect');
         var sprintNumberSelect = document.getElementById('sprintNumberSelect');
         var finishedObsoleteSelect = document.getElementById('finishedObsoleteRadio');
-        var sprintStatus = document.getElementById('sprintSelectField').value;
-
+        
+        // these lines define whether the optional select fields are displayed based on the value of the first select field
         if (selectValue === 'productBacklog') {
             backlogSelect.style.display = 'block';
             sprintColumnSelect.style.display = 'none';
             sprintNumberSelect.style.display = 'none';
+            finishedObsoleteSelect.style.display = 'none';
         } else if (selectValue === 'sprintPlanning') {
             sprintColumnSelect.style.display = 'block';
             backlogSelect.style.display = 'none';
@@ -167,6 +178,7 @@ New Ticket Form
             backlogSelect.style.display = 'none';
             sprintColumnSelect.style.display = 'none';
             sprintNumberSelect.style.display = 'none';
+            finishedObsoleteSelect.style.display = 'none';
         }
     }
 </script>

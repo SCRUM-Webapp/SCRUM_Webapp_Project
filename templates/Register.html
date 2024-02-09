@@ -8,21 +8,25 @@ Registration Form
     <div class="d-flex align-items-center justify-content-center" style="height: 80vh; width: 100vw;">
     <!-- added d-flex align-items-center justify-content-center to center the form vertically and horizontally -->
         <form method="post" action="{{url_for('register')}}">
+        <!-- adding hidden_tag() to prevent CSRF attacks -->
         {{ form.hidden_tag() }}
             <fieldset>
 
                 <legend>Register</legend>
 
+                {#USERNAME#}
                 <div class="form-group">
                     {{ form.username.label }}
                     {{ form.username(class="form-control") }}
                 </div>
 
+                {#EMAIL#}
                 <div class="form-group">
                     {{ form.email.label }}
                     {{ form.email(class="form-control") }}
                 </div>
 
+                {#PASSWORD#}
                 <div class="form-group">
                     {{ form.password.label }}
                     {{ form.password(class="form-control") }}

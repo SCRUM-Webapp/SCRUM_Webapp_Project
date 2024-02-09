@@ -1,3 +1,4 @@
+<!-- This is the base.html file. It bundles all the sections that every template uses in one file. -->
 {% from 'bootstrap5/utils.html' import render_messages %}
 
 <!DOCTYPE html>
@@ -5,20 +6,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+    <!-- The title block allows inheriting templates to insert a title -->
     <title>{% block TITLE%}{%endblock%}</title>
+    <!-- Load Bootstrap CSS from flask-bootstrap extension -->
     {{ bootstrap.load_css() }}
 </head>
 
-<!-- Check out block TITLE! -->
-
 <body>
 
+<!-- Button for Offcanvas Menu -->
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="margin: 10px;">
   Menu
 </button>
 
+<!-- This is the block where Product Backlog can insert the ADD NEW TICKET button -->
 {% block ADDNEWITEM %}{% endblock %}
 
+<!-- This part sets up the Offcanvas Menu -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
@@ -26,6 +30,7 @@
   </div>
   <div class="offcanvas-body">
     <ul class="nav flex-column mb-2">
+      <!-- Navigation items with links to different pages -->
       <li style="margin-bottom: 5px;"><a class="btn btn-secondary" href="{{ url_for('index') }}">Home</a></li>
       <li style="margin-bottom: 5px; margin-top: 5px"><a class="btn btn-secondary" href="{{ url_for('product_backlog') }}">Product Backlog</a></li>
       <li style="margin-top: 5px;"><a class="btn btn-secondary" href="{{ url_for('sprint_planning', selected_sprint=1) }}">Sprint View</a></li>
@@ -45,17 +50,21 @@
   </div>
 </div>
 
-<!-- primarily for Sprint-Nav-Bar -->
+<!-- Header block for additional content. Primarily used for Sprint-Nav-Bar -->
 <header>{% block HEADER %}{% endblock %}</header>
 
     <main>
+    <!-- defines how Warning messages created by "flash" should be displayed -->
     <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
     {{ render_messages(dismissible=True, dismiss_animate=True) }}
     </div>
+        <!-- Main content block, intended for being overridden in child templates -->
         {% block CONTENT %}{% endblock %}
     </main>
 
+<!-- in this block the child templates can insert additional scripts -->
 {% block SCRIPTS %}{% endblock %}
+<!-- Load Bootstrap JS from flask-bootstrap extension -->
 {{ bootstrap.load_js() }}
 </body>
 </html>
