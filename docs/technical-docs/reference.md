@@ -19,74 +19,126 @@ Nicolas, Vasco
 
 ## Section / module
 
-### `function_definition()`
-
-**Route:** `/route/`
-
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
-
-**Purpose:** [Short explanation of what the function does and why]
-
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
----
-
 ### `index()`
 
 **Route:** `/`
 
-**Methods:**
+**Methods:** `GET`
 
-**Purpose:** Displays the users dashboard. Welcomes the user with his username and a different greeting depending on which time it is.
+**Purpose:** Displays the user's dashboard. Welcomes the user with their username and a different greeting depending on the time.
 
 **Sample output:**
 
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
+![User_Dashboard](/SCRUM_Webapp_Project/assets/images/User_Dashboard.png)
 
 ---
 
-## [Example, delete this section] Show to-do lists
+### `login()`
 
-### `get_lists()`
+**Route:** `/Login`
 
-**Route:** `/lists/`
+**Methods:** `GET`, `POST`
 
-**Methods:** `GET`
-
-**Purpose:** Show all to-do lists.
+**Purpose:** Renders the login form and handles user authentication.
 
 **Sample output:**
 
-![get_lists() sample](../assets/images/fswd-intro_00.png)
+![Login_Screen](/SCRUM_Webapp_Project/assets/images/Login_Screen.png)
 
 ---
 
-### `get_list_todos(list_id)`
+### `register()`
 
-**Route:** `/lists/<int:list_id>`
+**Route:** `/Register`
 
-**Methods:** `GET`
+**Methods:** `GET`, `POST`
 
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
+**Purpose:** Renders the registration form and handles user registration.
 
 **Sample output:**
 
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
+![Register_Screen](/SCRUM_Webapp_Project/assets/images/Register_Screen.png)
 
 ---
 
-## [Example, delete this section] Insert sample data
+### `product_backlog()`
 
-### `run_insert_sample()`
-
-**Route:** `/insert/sample`
+**Route:** `/Product_Backlog`
 
 **Methods:** `GET`
 
-**Purpose:** Flush the database and insert sample data set
+**Purpose:** Renders the product backlog page, displaying tickets categorized into different stages.
 
 **Sample output:**
 
-Browser shows: `Database flushed and populated with some sample data.`
+![Product_Backlog](/SCRUM_Webapp_Project/assets/images/Product_Backlog.png)
+
+---
+
+### `ticket(ticket_id)`
+
+**Route:** `/Ticket/<int:ticket_id>`
+
+**Methods:** `GET`, `POST`
+
+**Purpose:** Renders the ticket details page and allows users to update ticket information.
+
+**Sample output:**
+
+![Edit_Ticket](/SCRUM_Webapp_Project/assets/images/Edit_Ticket.png)
+
+---
+
+### `delete_ticket(ticket_id)`
+
+**Route:** `/Ticket/Delete/<int:ticket_id>`
+
+**Methods:** `POST`
+
+**Purpose:** Deletes a ticket with the specified ID.
+
+**Sample output:**
+
+![delete_ticket](/SCRUM_Webapp_Project/assets/images/delete_ticket.png)
+
+---
+
+### `new_ticket()`
+
+**Route:** `/Ticket/New_Ticket`
+
+**Methods:** `GET`, `POST`
+
+**Purpose:** Renders the form for creating a new ticket and handles ticket creation.
+
+**Sample output:**
+
+![Create_Ticket](/SCRUM_Webapp_Project/assets/images/Create_Ticket.png)
+
+---
+
+### `sprint_planning(selected_sprint)`
+
+**Route:** `/Sprint_Planning/<selected_sprint>`
+
+**Methods:** `GET`
+
+**Purpose:** Renders the sprint planning page, displaying tickets categorized into different stages for a specific sprint.
+
+**Sample output:**
+
+![Sprint_View](/SCRUM_Webapp_Project/assets/images/Sprint_View.png)
+
+---
+
+### `logout()`
+
+**Route:** `/Logout`
+
+**Methods:** `GET`
+
+**Purpose:** Logs out the current user.
+
+**Sample output:**
+
+![Login_Screen](/SCRUM_Webapp_Project/assets/images/Login_Screen.png)
