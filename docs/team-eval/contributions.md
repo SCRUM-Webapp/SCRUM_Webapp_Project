@@ -5,9 +5,9 @@ nav_order: 3
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
-# [Summary of individual contributions]
+# Summary of individual contributions
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,14 +17,14 @@ nav_order: 3
 {: toc }
 </details>
 
-## [Vasco Pogade]
+## Vasco
 
 Contributions
 : Jane's first contribution
 : Jane's second contribution
 : ...
 
-## [Nicolas Jobstvogt]
+## Nicolas
 
 Contributions
 : Joe's first contribution

@@ -7,4 +7,4 @@ nav_order: 6
 {: .label }
 Nicolas, Vasco
 
-# [Team evaluation]
+# Team evaluation

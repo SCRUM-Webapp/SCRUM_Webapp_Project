@@ -30,7 +30,7 @@ Updated
 
 ### Comment
 
-A bug occured so that the user couldn't log in after 7 days. After trying to solve this problem for 4 hours we decided to revert the feature. In a future version this feauture will get reintroduced.
+A bug occured so that the user couldn't log in after 7 days. After trying to solve this problem for 4 hours we decided to revert the feature. In a future version this feature will get reintroduced.
 
 ### Problem statement
 

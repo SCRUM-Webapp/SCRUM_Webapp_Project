@@ -7,4 +7,4 @@ nav_order: 2
 {: .label }
 Nicolas, Vasco
 
-# [Technical documentation]
+# Technical documentation

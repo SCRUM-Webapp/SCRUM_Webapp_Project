@@ -7,4 +7,4 @@ nav_order: 3
 {: .label }
 Nicolas, Vasco
 
-# [Design Decisions]
+# Design Decisions
