@@ -4,9 +4,9 @@ nav_order: 1
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
-#Value proposition
+# Value proposition
 {: .no_toc }
 
 <details open markdown="block">

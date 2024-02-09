@@ -7,37 +7,44 @@ from forms import LoginForm, RegisterForm, TicketForm
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import inspect
 
+# initialize the flask app
 app = Flask(__name__)
 
 from db import db, Ticket, User, insert_sample
 
+# configure the flask app
 app.config.from_mapping(
     SECRET_KEY = 'iterative_working_is_the_best',
     BOOTSTRAP_BOOTSWATCH_THEME = 'quartz'
 )
-
+# initialize Bootstrap
 bootstrap = Bootstrap5(app)
 
+# initialize flask login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+# load user from database
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# homepage route
 @app.route('/')
 @login_required
 def index():
     current_time = datetime.now()
     hour = current_time.hour
 
+    # greet the user depending on the time of day
     if 4 <= hour < 12:
         time_of_day = 'morning'
     elif 12 <= hour < 18:
         time_of_day = 'afternoon'
     else:
         time_of_day = 'evening'
+
     return render_template('Index.html', username=current_user.username, time_of_day=time_of_day)
 
 @app.route('/Login', methods=['GET', 'POST'])
@@ -84,8 +91,8 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash('Your account has been succesfully created, please login.')
-            # Redirect to update_user_list route to update choices
             return redirect(url_for('login'))
+
     return render_template('Register.html', form=form)
 
 @app.route('/Product_Backlog')
@@ -96,14 +103,6 @@ def product_backlog():
     analyze_tickets = db.session.query(Ticket).filter_by(ticket_status='Analyze', sprint_number=None).order_by(Ticket.ticket_id).all()
     ready_for_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Ready for Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
     next_sprint_tickets = db.session.query(Ticket).filter_by(ticket_status='Next Sprint', sprint_number=None).order_by(Ticket.ticket_id).all()
-    for ticket in inbox_tickets:
-        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
-    for ticket in analyze_tickets:
-        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
-    for ticket in ready_for_sprint_tickets:
-        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
-    for ticket in next_sprint_tickets:
-        print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
 
     return render_template('Product_Backlog.html', inbox_tickets=inbox_tickets, analyze_tickets=analyze_tickets, ready_for_sprint_tickets=ready_for_sprint_tickets, next_sprint_tickets=next_sprint_tickets)
 
@@ -122,11 +121,14 @@ def ticket(ticket_id):
         ticket.assigned = form.owner_select.data
 
         if form.product_sprint_select.data == 'productBacklog':
+
             # Clear sprint-related fields
             ticket.sprint_number = None
             # Set ticket status based on the backlog selection
             ticket.ticket_status = form.backlog_select.data
+
         elif form.product_sprint_select.data == 'sprintPlanning':
+
             # Set ticket status based on the sprint selection
             if form.sprint_select.data == 'Finished/Obsolete':
                 # If 'Finished/Obsolete' is selected, check which radio button is checked
@@ -182,14 +184,16 @@ def new_ticket():
         new_ticket.assigned = form.owner_select.data
 
         if form.product_sprint_select.data == 'productBacklog':
+
             # Set ticket status based on the backlog selection
             new_ticket.ticket_status = form.backlog_select.data
             new_ticket.sprint_number = None
             db.session.add(new_ticket)
             db.session.commit()
-            #flash('New ticket added to Product Backlog')
             return redirect(url_for('product_backlog'))
+
         elif form.product_sprint_select.data == 'sprintPlanning':
+            
             # Set ticket status based on the sprint selection
             new_ticket.sprint_number = form.sprint_number.data
             if form.sprint_select.data == 'Finished/Obsolete':
@@ -202,8 +206,8 @@ def new_ticket():
                 new_ticket.ticket_status = form.sprint_select.data
             db.session.add(new_ticket)
             db.session.commit()
-            #flash('New ticket added to Sprint Planning')
             return redirect(url_for('sprint_planning', selected_sprint=new_ticket.sprint_number))
+
     elif request.method == 'POST' and (not form.ticket_name.data.strip() or not form.description.data.strip()):
         flash('Title and Description are required fields. Please fill them out.')
 
@@ -212,22 +216,13 @@ def new_ticket():
 @app.route('/Sprint_Planning/<selected_sprint>')
 @login_required
 def sprint_planning(selected_sprint):
-    if selected_sprint == 'add':
-        pass
-    else:
-        sprint_number = int(selected_sprint)
-        to_do = db.session.query(Ticket).filter_by(ticket_status='To-Do', sprint_number=sprint_number).all()
-        in_progress = db.session.query(Ticket).filter_by(ticket_status='In Progress', sprint_number=sprint_number).all()
-        testing = db.session.query(Ticket).filter_by(ticket_status='Testing', sprint_number=sprint_number).all()
-        finished_obsolete = db.session.query(Ticket).filter(Ticket.ticket_status.in_(['Finished', 'Obsolete']), Ticket.sprint_number == sprint_number).all()
+    sprint_number = int(selected_sprint)
+    to_do = db.session.query(Ticket).filter_by(ticket_status='To-Do', sprint_number=sprint_number).all()
+    in_progress = db.session.query(Ticket).filter_by(ticket_status='In Progress', sprint_number=sprint_number).all()
+    testing = db.session.query(Ticket).filter_by(ticket_status='Testing', sprint_number=sprint_number).all()
+    finished_obsolete = db.session.query(Ticket).filter(Ticket.ticket_status.in_(['Finished', 'Obsolete']), Ticket.sprint_number == sprint_number).all()
 
-
-        return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
-
-@app.route('/Profile')
-@login_required
-def profile():
-    return render_template('Profile.html')
+    return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
 
 @app.route('/Logout')
 @login_required

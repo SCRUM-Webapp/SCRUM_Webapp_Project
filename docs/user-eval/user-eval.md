@@ -16,30 +16,30 @@ Nicolas, Vasco
 {: toc }
 </details>
 
-## 01: [Title]
+## User Flow
 
 ### Meta
 
 Status
-: **Work in progress** - Done - Obsolete
+: Work in progress - **Done** - Obsolete
 
 Updated
-: DD-MMM-YYYY
+: 07.02.2024
 
 ### Goal
 
-[Describe the goal of this evaluation, for example as a research question like: "How long does it take to register a new account and what is the drop-out rate?"]
+The goal of this evaluation is to determine the optimal user flow through our app.
 
 ### Method
 
-[Describe how you proceed to achieve your evaluation goal. Be as specific as possible: others should be able to replicate your evaluation by following the description on this section.]
+We presented our application to family and friends and observed their navigation through the app, gathering feedback along the way.
 
 ### Results
 
-[Present the main results of your evaluation, for example: "On average, users need 3 min to register. The drop-out rate was 70%. Users that didn't complete provided the following reasons: ..."]
+One common critique was the inconvenience of being redirected back to the product backlog page after creating a new ticket for the sprint view or editing a ticket within the sprint view. Users expressed frustration at having to navigate back to the sprint view and select the appropriate sprint where the ticket was created.
 
 ### Implications
 
-[What did you learn from this evaluation and what will you change to improve? Example: "We aim to decrease the drop-out rate by not asking for a birth date. We will re-run this evaluation to measure the impact."]
+Based on this feedback, we made adjustments to our code to improve the user flow of the app.
 
 ---
