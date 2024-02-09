@@ -5,7 +5,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, RegisterForm, TicketForm
 from sqlalchemy.exc import SQLAlchemyError
-
+from sqlalchemy import inspect
 
 app = Flask(__name__)
 
@@ -91,9 +91,6 @@ def register():
             return redirect(url_for('login'))
     return render_template('Register.html', form=form)
 
-
-from sqlalchemy import inspect
-
 @app.route('/Product_Backlog')
 @login_required
 def product_backlog():
@@ -112,7 +109,6 @@ def product_backlog():
         print("Ticket ID:", ticket.ticket_id, "Assigned:", ticket.assigned)
 
     return render_template('Product_Backlog.html', inbox_tickets=inbox_tickets, analyze_tickets=analyze_tickets, ready_for_sprint_tickets=ready_for_sprint_tickets, next_sprint_tickets=next_sprint_tickets)
-
 
 @app.route('/Ticket/<int:ticket_id>', methods=['GET', 'POST'])
 @login_required
@@ -176,7 +172,6 @@ def delete_ticket(ticket_id):
         abort(500, description='Failed to delete ticket')
     return redirect(url_for('product_backlog'))
 
-
 @app.route('/Ticket/New_Ticket', methods=['GET', 'POST'])
 @login_required
 def new_ticket():
@@ -216,8 +211,6 @@ def new_ticket():
         flash('Title and Description are required fields. Please fill them out.')
 
     return render_template('New_Ticket.html', form=form)
-
-
 
 @app.route('/Sprint_Planning/<selected_sprint>')
 @login_required

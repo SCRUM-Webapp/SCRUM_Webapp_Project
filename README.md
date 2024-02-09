@@ -20,5 +20,30 @@ Wir streben eine sehr gute Note an.
 # GitHub Pages:  
 Here is the link to our GitHub Pages: https://scrum-webapp.github.io/SCRUM_Webapp_Project/
 
+# How to get it to work?
 
-
+Step 1: Clone the Repository to your prefered working environment:
+```bash
+git clone https://github.com/SCRUM-Webapp/SCRUM_Webapp_Project.git
+```
+Step 2: Create a Virtual Environment within your project directory:
+```
+python -m venv venv
+```
+Step 3: Activate the Virtual Environment:
+```bash
+source venv\Scripts\activate
+```
+Step 4: Install required packages:
+```
+pip install -r requirements.txt
+```
+Step 5: Initialize the database:
+```
+flask init-db
+```
+Step 6: Run the application:
+```
+flask run
+```
+Step 7: Visit the address showing on the console
