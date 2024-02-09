@@ -47,10 +47,15 @@ def index():
 
     return render_template('Index.html', username=current_user.username, time_of_day=time_of_day)
 
+# For the Login Process and the Register Progess we used ChatGPT as a search engine for explaining how Flask-Login works and how we can implement it into our webapp (https://chat.openai.com/)
+
+# login route
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
+    # create a new instance of the login form
     form = LoginForm()
 
+    # check if the form was submitted and validate the form data
     if form.validate_on_submit():
         # Retrieve form data
         email = form.email.data
@@ -59,9 +64,11 @@ def login():
         # Validate credentials
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
+            # if the user is valid, log them in
             login_user(user)
             return redirect(url_for('index'))
         else:
+            # if the user is invalid, flash an error message
             flash('Invalid username or password')
 
     return render_template('Login.html', form=form)
@@ -213,6 +220,7 @@ def new_ticket():
 
     return render_template('New_Ticket.html', form=form)
 
+# this route is used to display the sprint planning page
 @app.route('/Sprint_Planning/<selected_sprint>')
 @login_required
 def sprint_planning(selected_sprint):
@@ -224,6 +232,7 @@ def sprint_planning(selected_sprint):
 
     return render_template('Sprint_Planning.html', selected_sprint=sprint_number, to_do=to_do, in_progress=in_progress, testing=testing, finished_obsolete=finished_obsolete)
 
+# this route logs the user out
 @app.route('/Logout')
 @login_required
 def logout():
