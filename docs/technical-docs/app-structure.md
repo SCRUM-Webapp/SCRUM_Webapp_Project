@@ -40,7 +40,7 @@ Nicolas, Vasco
 - As you can see we have completely changed our Product Backlog design compared to what we thought it would look like in the conception phase
 - Instead of a table with each task being a row, it now is in the same design as the Sprint View
 - We have four columns each representing a different phase
-- during these phases the first idea of a feature or task is refined and made ready to be in a sprint
+- During these phases the first idea of a feature or task is refined and made ready to be in a sprint
 
 ## Sprint View
 ### Sprint View Version Conception Phase
@@ -50,11 +50,11 @@ Nicolas, Vasco
 ![Sprint View 2.0](/SCRUM_Webapp_Project/assets/images/Sprint_View.png)
 
 ### What has changed
-- on this route not that much changed
-- we still have 4 columns
-- the first column is now named differently
-- the selection of sprints now is done with a navigation bar similar to a radio button instead of a drop down menu
-- the columns are not framed anymore but are kind of free floating
+- On this route not that much changed
+- We still have 4 columns
+- The first column is now named differently
+- The selection of sprints now is done with a navigation bar similar to a radio button instead of a drop down menu
+- The columns are not framed anymore but are kind of free floating
 
 ## Create Ticket
 ### Create Ticket Version Conception Phase
@@ -64,10 +64,10 @@ Nicolas, Vasco
 ![Create Ticket](/SCRUM_Webapp_Project/assets/images/Create_Ticket.png)
 
 ### What has changed
-- this design in its core stayed the same
-- however there a lot more fields than in the conception
-- additionally instead of a Pop-Up with a frame around it, it now is a seperate page
-- we also added little descriptions under each field
+- This design in its core stayed the same
+- However there a lot more fields than in the conception
+- Additionally instead of a Pop-Up with a frame around it, it now is a seperate page
+- We also added little descriptions under each field
 
 ## Edit Ticket
 ### Edit Ticket Version Conception Phase
@@ -77,9 +77,9 @@ Nicolas, Vasco
 ![Edit Ticket](/SCRUM_Webapp_Project/assets/images/Edit_Ticket.png)
 
 ### What has changed
-- in its core this design stayed the same as well
-- here we also made it a seperate page instead of a Pop-Up
-- the Delte, Cancel and Submit button now are all on the lower left corner
+- In its core this design stayed the same as well
+- Here we also made it a seperate page instead of a Pop-Up
+- The Delete, Cancel and Submit button now are all on the lower left corner
 
 ## Navigation Bar
 ### Implemented Version
