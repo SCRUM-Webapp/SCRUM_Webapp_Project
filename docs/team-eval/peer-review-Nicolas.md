@@ -1,5 +1,5 @@
 ---
-title: Peer Review
+title: Peer Review for Nicolas
 parent: Team Evaluation
 nav_order: 4
 ---
@@ -7,7 +7,7 @@ nav_order: 4
 {: .label }
 Vasco
 
-# [Peer review]
+# Peer review
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,9 +17,9 @@ Vasco
 {: toc }
 </details>
 
-## Nicolas Jobstvogt
+## Nicolas
 
-### My observation
+### My observations
 
 - very structured
 - diligent planning and staying on schedule

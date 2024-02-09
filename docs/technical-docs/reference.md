@@ -5,9 +5,9 @@ nav_order: 4
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
-# [Reference documentation]
+# Reference documentation
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,7 +17,7 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Section / module]
+## Section / module
 
 ### `function_definition()`
 

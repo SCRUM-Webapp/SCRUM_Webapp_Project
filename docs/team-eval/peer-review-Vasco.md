@@ -1,5 +1,5 @@
 ---
-title: Peer Review
+title: Peer Review for Vasco
 parent: Team Evaluation
 nav_order: 5
 ---
@@ -7,7 +7,7 @@ nav_order: 5
 {: .label }
 Nicolas
 
-# [Peer review]
+# Peer review
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,16 +17,19 @@ Nicolas
 {: toc }
 </details>
 
-## Nicolas Jobstvogt
+## Vasco
 
-### My observation
+### My Observations
 
-- 
+- Highly structured
+- Very ambitious and motivated
+- Easy to communicate with
 
-### Effect on me
+### Effect on Me
 
-[What positive or negative effect did this observation have on the reviewer?]
+- Normally I tend to postpone tasks to the end, but Vasco made sure that we have an organized schedule with regular meetings throughout the semester that kept me motivated to deliver and show him what I managed to achieve since the last meeting.
+- The communication between us was always based on respect for each other and very concise.
 
-### Tip for the future
+### Tip for the Future
 
-[What should be changed or strengthened for the point of view of the reviewer? ]
+- Continue working like this.

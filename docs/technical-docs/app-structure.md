@@ -5,9 +5,9 @@ nav_order: 1
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
-# [App structure, incl. context]
+# App structure, incl. context
 {: .no_toc }
 
 <details open markdown="block">

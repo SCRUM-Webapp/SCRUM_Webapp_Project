@@ -4,9 +4,9 @@ nav_order: 4
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
-# [User evaluation]
+# User evaluation
 {: .no_toc }
 
 <details open markdown="block">
