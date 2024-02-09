@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 {: .label }
-[Nicolas Jobstvogt, Vasco Pogade]
+Nicolas, Vasco
 
 # Goals achieved and missed
 {: .no_toc }
