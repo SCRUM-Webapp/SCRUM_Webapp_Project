@@ -97,10 +97,6 @@ Nicolas, Vasco
 
 **Purpose:** Deletes a ticket with the specified ID.
 
-**Sample output:**
-
-![delete_ticket](/SCRUM_Webapp_Project/assets/images/delete_ticket.png)
-
 ---
 
 ### `new_ticket()`
