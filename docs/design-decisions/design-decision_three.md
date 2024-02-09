@@ -22,10 +22,15 @@ Vasco
 ### Meta
 
 Status
-: Work in progress - **Decided** - Obsolete
+: Work in progress - Decided - **Obsolete**
 
 Updated
-: 04-02-2024
+: 09-02-2024
+
+
+### Comment
+
+A bug occured so that the user couldn't log in after 7 days. After trying to solve this problem for 4 hours we decided to revert the feature. In a future version this feauture will get reintroduced.
 
 ### Problem statement
 
