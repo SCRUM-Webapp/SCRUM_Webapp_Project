@@ -2,60 +2,58 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-    <title>{% block TITLE%}{%endblock%}</title>
-    {{ bootstrap.load_css() }}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+  <title>{% block TITLE%}{%endblock%}</title>
+  {{ bootstrap.load_css() }}
 </head>
 
 <!-- Check out block TITLE! -->
 
 <body>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="margin: 10px;">
-  Menu
-</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+    aria-controls="offcanvasExample" style="margin: 10px;">
+    Menu
+  </button>
 
-{% block ADDNEWITEM %}{% endblock %}
+  {% block ADDNEWITEM %}{% endblock %}
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="nav flex-column mb-2">
-      <li style="margin-bottom: 5px;"><a class="btn btn-secondary" href="{{ url_for('index') }}">Home</a></li>
-      <li style="margin-bottom: 5px; margin-top: 5px"><a class="btn btn-secondary" href="{{ url_for('product_backlog') }}">Product Backlog</a></li>
-      <li style="margin-top: 5px;"><a class="btn btn-secondary" href="{{ url_for('sprint_planning', selected_sprint=1) }}">Sprint View</a></li>
-      <li>  
-        <div class="dropdown mt-3">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Account
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
-                <li><a class="dropdown-item" href="{{ url_for('profile') }}">Edit account</a></li>
-                <div class="dropdown-divider"></div>
-                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Log Out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- primarily for Sprint-Nav-Bar -->
-<header>{% block HEADER %}{% endblock %}</header>
-
-    <main>
-    <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
-    {{ render_messages(dismissible=True, dismiss_animate=True) }}
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-        {% block CONTENT %}{% endblock %}
-    </main>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column mb-2">
+        <li style="margin-bottom: 5px;"><a class="btn btn-secondary" href="{{ url_for('index') }}">Home</a></li>
+        <li style="margin-bottom: 5px; margin-top: 5px"><a class="btn btn-secondary"
+            href="{{ url_for('product_backlog') }}">Product Backlog</a></li>
+        <li style="margin-top: 5px;"><a class="btn btn-secondary"
+            href="{{ url_for('sprint_planning', selected_sprint=1) }}">Sprint View</a></li>
+        <li>
+          <div class="mt-3">
+            <a class="btn btn-secondary" href="{{ url_for('logout') }}">Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-{% block SCRIPTS %}{% endblock %}
-{{ bootstrap.load_js() }}
+  <!-- primarily for Sprint-Nav-Bar -->
+  <header>{% block HEADER %}{% endblock %}</header>
+
+  <main>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
+      {{ render_messages(dismissible=True, dismiss_animate=True) }}
+    </div>
+    {% block CONTENT %}{% endblock %}
+  </main>
+
+  {% block SCRIPTS %}{% endblock %}
+  {{ bootstrap.load_js() }}
 </body>
+
 </html>
